@@ -1,4 +1,4 @@
-package da_buttare;
+package pattume;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
