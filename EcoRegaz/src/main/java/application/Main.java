@@ -33,8 +33,8 @@ public class Main extends Application {
 		 */
 		primaryStage.setTitle("ERMS");
 
-		// TODO: aggiungere l'icona del programma
-		// primaryStage.getIcons().add(new Image("path"));
+			// TODO: aggiungere l'icona del programma
+			// primaryStage.getIcons().add(new Image("path"));
 
 		primaryStage.setMinWidth(MIN_WIDTH);
 		primaryStage.setMinHeight(MIN_HIGHT);
@@ -44,6 +44,7 @@ public class Main extends Application {
 
 		primaryStage.centerOnScreen();
 
+		
 		/*
 		 * Load di HomeLogin con la chiamata al costruttore personalizzata.
 		 */
@@ -56,12 +57,14 @@ public class Main extends Application {
 			AlertPanel.saysError("ERRORE: nella load di HomeLogin", e);
 		}
 
+		
 		/*
 		 * Creazione della Scene del login e inserimento del CSS
 		 */
 		Scene loginScene = new Scene(homeLogin);
 		loginScene.getStylesheets().add(getClass().getResource(CSSbootstrap3URL).toExternalForm());
 
+		
 		/*
 		 * Set della loginScene e visualizzazione del primaryStage
 		 */
