@@ -19,7 +19,7 @@ public class Persister {
 	
 	private static Persister instance = null; 
 	
-	public static Persister getInstance() {
+	public static Persister getInstance() throws SQLException {
 		if(instance == null)
 		{
 			instance = new Persister();
@@ -27,99 +27,13 @@ public class Persister {
 		return instance;
 	}
 	
-	private Persister() {
+	private Persister() throws SQLException {
 		
-	}
-	
-	
-	
-	
-	
-	
-	
-
-	//////////////////////////////////////////////////////////////////////////////////////////////////
-	/*
-	 * INIZIALIZZAZIONE del database e creazione se necessario
-	 * da fare ogni volta che si accende l'applicazione
-	 * magari lo si mette in un'altra classe a parte, oppure lo si mette nel main
-	 * OGNI PERSISTER DEVE AVERE connection COME VARIABILE!
-	 */
-	public boolean openDatabase() throws SQLException {
-
-		/*
-		 * Accensione del database
-		 */
-		String dbName = "ERMS_DB";
-		connection = DriverManager.getConnection("jdbc:derby:" + dbName + ";create=true");
-
-		System.out.println("Connected to database " + dbName);// print inutile
-
-		/*
-		 * We want to control transactions manually. Autocommit is on by default in JDBC.
-		 */
-		connection.setAutoCommit(false);
-		return true;
-	}
-
-	/**
-	 * Metodo che chiude la connessione e spegne il database. <br>
-	 * Viene invocato quando si chiude lo stage del ricettario. <br>
-	 * Avviene tutto correttamente se viene lanciata una precisa eccezione, che se non è quella giusta il metodo lancia a sua volta una SQLException.
-	 * 
-	 * @throws SQLException
-	 */
-
-	public void closeDatabase() throws SQLException {
-
-		/*
-		 * Comando che comunica al server il termine delle operazioni
-		 */
-		connection.commit();
-
-		/*
-		 *  Rilascio delle risorse
-		 */
-		statement.close();
-		connection.close();
-
-		/*
-		 * In embedded mode, an application should shut down Derby.
-		 * Shutdown throws the XJ015 exception to confirm success.
-		 */
-		try {
-			DriverManager.getConnection("jdbc:derby:;shutdown=true");
-		} catch (SQLException se) {
-
-			if (se.getSQLState().equals("XJ015") && se.getErrorCode() == 50000) {
-
-				// success
-				System.out.println("Derby shut down normally"); // TODO print inutile
-			} else {
-
-				// failure
-				throw se;
-			}
-		}
-
-	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	public void main(String[] args) throws SQLException {
-
 		/*
 		 * 1) PARTE comune ad ogni persisiter (a parte login ovviamente)
 		 */
 
 		/*
-		 * 
 		 * E' importante che lo Statement della select viva anche oltre il metodo, quindi è necessario che sia una variabile globale.
 		 * Creo lo statement per verificare che la tabella sia stata creata, altrimenti la creo
 		 */
