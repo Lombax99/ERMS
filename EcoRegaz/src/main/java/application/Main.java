@@ -14,8 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.java.persisters.MainDB;
-import main.java.view.interfacciaHome.HomePrincipale;
-import main.java.view.interfacciaLogin.HomeLogin;
+import main.java.views.interfacciaHome.HomePrincipale;
+import main.java.views.interfacciaLogin.HomeLogin;
 
 public class Main extends Application {
 
