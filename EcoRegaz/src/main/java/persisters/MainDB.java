@@ -10,7 +10,6 @@ import java.sql.SQLException;
  * Fornisce la variabile di connessione col DB. <br>
  * E' tutto statico perché non c'è bisogno di creare un'istanza di tale classe.
  */
-
 public class MainDB {
 
 	/**
@@ -18,6 +17,7 @@ public class MainDB {
 	 */
 	public static Connection connection;
 
+	
 	/**
 	 * Metodo che apre la connessione con database, e inizializza la variabile "connection". <br>
 	 * 
@@ -39,6 +39,7 @@ public class MainDB {
 		connection.setAutoCommit(true);
 	}
 
+	
 	/**
 	 * Metodo che chiude la connessione e spegne il database. <br>
 	 * Viene invocato quando si chiude lo stage principale. <br>
