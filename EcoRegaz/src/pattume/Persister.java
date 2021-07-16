@@ -11,6 +11,32 @@ public class Persister {
 
 	Statement statement;
 	Connection connection;
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////
+	/*
+	 * costruttore pattern singleton
+	 */
+	
+	private static Persister instance = null; 
+	
+	public static Persister getInstance() {
+		if(instance == null)
+		{
+			instance = new Persister();
+		}
+		return instance;
+	}
+	
+	private Persister() {
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	/*
