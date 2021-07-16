@@ -119,6 +119,8 @@ public class Persister {
 		 */
 
 		/*
+		 * 
+		 * E' importante che lo Statement della select viva anche oltre il metodo, quindi è necessario che sia una variabile globale.
 		 * Creo lo statement per verificare che la tabella sia stata creata, altrimenti la creo
 		 */
 		statement = connection.createStatement();
@@ -182,7 +184,7 @@ public class Persister {
 	public ResultSet select(String selectString) throws SQLException {
 
 		/*
-		 * A ResultSet objectis automatically closed by the Statement object that generated it 
+		 * A ResultSet object is automatically closed by the Statement object that generated it,
 		 * when that Statement object is closed, re-executed, or is used to retrieve the next result from asequence of multiple results. 
 		 */
 		System.out.println(selectString);// TODO print inutile
@@ -269,5 +271,27 @@ public class Persister {
 
 		return true;
 	}
+	
+	
+	
+	
+	/*
+	 * Di base si fa una select prima di una visualizza. Si può usare il result set per inserire e eliminare e modificare una riga.
+	 * Bisogna metterlo scrollable e updatable (vedi doc del ResultSet).
+	 * Tuttavia ogni ResultSet muore quando viene chiuso lo Statement da cui proviene, oppure può essere chiuso manualmente.
+	 * Quindi è importante che lo Statement rimanga vivo al di fuori del metodo, quindi che sia globale.
+	 * 
+	 * Tutte le volte che si vuole modificare un ResultSet, questo deve essere chiuso (così viene fatto un autoCommit, se abilitato).
+	 * Per visualizzare i dati modificati, bisogna effettuare una seconda select e visualizzare i dati dal nuovo ResultSet.
+	 * 
+	 * Nel caso io voglia visualizzare gli iscritti e poi andare da un'altra parte, devo fare la select, caricare in grafica i dati dal ResultSet,
+	 * 		e poi posso chiudere il resultSet se esco dalla ViewIscritti. In questo modo rimane caricata in memoria solo la grafica.
+	 * Nel caso in cui poi voglia tornare a vedere gli iscritti e modificarli, poiché non c'è più il ResultSet, posso o chiamare la funzione che direttamente 
+	 * 		fa UPDATE/INSERT/DELETE al DB e poi chiamare la select per vedere il risultato, oppure chiamare la select per modificare il ResultSet e richiamarla per vedere il risultato.
+	 * Sinceramente a me piace il secondo caso, perché nel primo bisogna chiamare il metodo per ogni singola modifica, mentre nel secondo solo una volta.
+	 * 
+	 * In generale quindi, ogni volta che si esce da una view, si chiude il ResultSet. Quindi è possibile in questo modo usare uno Statement per ogni Persister,
+	 * 		anche per motivi di estendibilità.
+	 */
 
 }
