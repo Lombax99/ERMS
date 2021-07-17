@@ -1,5 +1,5 @@
 package main.java.persisters.strumenti.deposito;
 
-public class PersisterDeposito {
+public class PersisterDeposito implements IPersisterDeposito{
 
 }
