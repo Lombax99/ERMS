@@ -18,7 +18,7 @@ public class Pinza implements IStrumento{
 
 	@Override
 	public int getId_Deposito() {
-		return 0;
+		return id_Deposito;
 	}
 
 	public int getId_Pinza() {
