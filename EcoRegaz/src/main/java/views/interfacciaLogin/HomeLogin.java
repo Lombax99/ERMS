@@ -2,7 +2,7 @@ package main.java.views.interfacciaLogin;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
+import java.util.concurrent.TimeUnit;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,14 +42,16 @@ public class HomeLogin {
 	 * Se è falsa, appare un AlertPanel e il campo viene liberato. <br>
 	 * Se è vera, viene eseguito il metodo initHomePrincipale(). <br>
 	 * In entrambi i casi, viene scritto un log via logPersister.
+	 * @throws InterruptedException 
 	 */
 	@FXML
-	private void verificaCredenzialeHandler(ActionEvent event) {
+	private void verificaCredenzialeHandler(ActionEvent event) throws InterruptedException {
 		if (loginController.verificaCredenziali(passwordField.getText())) {
 			initHomePrincipale();
 		} else {
 			passwordField.clear();
 			AlertPanel.saysInfo("PASSWORD ERRATA", "Riprovare");
+			TimeUnit.SECONDS.sleep(3);
 		}
 	}
 
