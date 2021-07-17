@@ -181,12 +181,12 @@ public class PersisterIscritti implements IPersisterIscritti {
 	@Override
 	public boolean modificaIscritto(Iscritto iscritto) throws SQLException {
 
-		PreparedStatement psUpdate = connection.prepareStatement("UPDATE ISCRITTI_TABLE SET COD_FISC = ?, NOME = ?, COGNOME = ?");
+		PreparedStatement psUpdate = connection.prepareStatement("UPDATE ISCRITTI_TABLE SET NOME = ?, COGNOME = ? WHERE COD_FISC = ?");
 
 		// setto tutti i "?"
-		psUpdate.setString(1, iscritto.getCodFisc());
-		psUpdate.setString(2, iscritto.getNome());
-		psUpdate.setString(3, iscritto.getCognome());
+		psUpdate.setString(1, iscritto.getNome());
+		psUpdate.setString(2, iscritto.getCognome());
+		psUpdate.setString(3, iscritto.getCodFisc());
 		
 		// esecuzione effettiva dell'UPDATE
 		if (psUpdate.executeUpdate() != 1) {
