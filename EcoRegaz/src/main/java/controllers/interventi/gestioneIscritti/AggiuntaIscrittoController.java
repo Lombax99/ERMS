@@ -42,12 +42,14 @@ public class AggiuntaIscrittoController {
 			AlertPanel.saysInfo("ERRORE", "Codice Fiscale non valido");
 			return false;
 		}
+
 		
-		/* TODO
-		 * manca un controllo per il CodFisc ben formato, semplicemente non dà risultati ricerdando
-		 * se poi in futuro vogliamo aggiungerlo ok ma non ne vedo il bisogno
-		 */
+		//Conversione ad UpperCase nome e cognome
+		iscritto.setNome(iscritto.getNome().toUpperCase());
+		iscritto.setCognome(iscritto.getCognome().toUpperCase());
+		iscritto.setCodFisc(iscritto.getCodFisc().toUpperCase());
 		
+		if(iscritto.getCodFisc().matches("^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$"))
 		
 		//evocazione persister normale
 		try {

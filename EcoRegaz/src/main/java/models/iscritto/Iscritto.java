@@ -23,5 +23,17 @@ public class Iscritto {
 	public String getCodFisc() {
 		return codFisc;
 	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public void setCodFisc(String codFisc) {
+		this.codFisc = codFisc;
+	}
 	
 }
