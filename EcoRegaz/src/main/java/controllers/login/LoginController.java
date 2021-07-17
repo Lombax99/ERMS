@@ -17,7 +17,9 @@ public class LoginController {
 	 * 	   contentente la password reale*/
 	public boolean verificaCredenziali(String text)
 	{
-		return(text.contentEquals(password));
+		boolean value = text.contentEquals(password);
+		this.scritturaEntry(value);
+		return value;
 	}
 
 	
