@@ -164,12 +164,12 @@ public class PersisterDeposito implements IPersisterDeposito{
 	 * @throws SQLException
 	 */
 	@Override
-	public boolean rimuoviDeposito(String id_deposito) throws SQLException {
+	public boolean rimuoviDeposito(int id_deposito) throws SQLException {
 		
 		PreparedStatement psDelete = connection.prepareStatement("DELETE FROM DEPOSITI_TABLE WHERE ID_DEPOSITO = ?");
 
 		// setto tutti i "?"
-		psDelete.setString(1, id_deposito);
+		psDelete.setInt(1, id_deposito);
 
 		// esecuzione effettiva del DELETE
 		if (psDelete.executeUpdate() != 1) {

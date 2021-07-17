@@ -6,19 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import main.java.application.*;
-import main.java.models.deposito.Deposito;
 
 public class ElencoDepositiController {
-	
+
 	public ResultSet elencoDepositi() {
 
-		ResultSet result;
-		try{
-		result = PersisterDeposito.getInstance().elencoDepositi());
-	} catch(SQLException e) {
-		AlertPanel.saysError("Errore nell'apertura del deposito", e);
-	}
+		ResultSet result = null;
+		try {
+			result = PersisterDeposito.getInstance().visualizzaDepositi();
+		} catch (SQLException e) {
+			AlertPanel.saysError("Errore nella visualizzazione dei depositi", e);
+		}
 		return result;
 	}
 }
-

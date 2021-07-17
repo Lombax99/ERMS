@@ -15,7 +15,7 @@ public interface IPersisterDeposito {
 	
 	public boolean aggiuntaDeposito(Deposito deposito) throws SQLException;
 	
-	public boolean rimuoviDeposito(String id_deposito) throws SQLException;
+	public boolean rimuoviDeposito(int id_deposito) throws SQLException;
 	
 	public boolean modificaDeposito(Deposito deposito) throws SQLException;
 	
