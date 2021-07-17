@@ -9,7 +9,12 @@ public class LoginController {
 	private PersisterLog persisterReference;
 	/* Stringa fake value per il funzionamento del prototipo
 	 * Sostituisce il file in cui verrà memorizzata la password reale*/
+	
 	private final String password="SuperUserPassword";
+	
+	public LoginController() {
+		persisterReference = new PersisterLog(); 
+	}
 	
 	
 	/* Controlla il contenuto della stringa
