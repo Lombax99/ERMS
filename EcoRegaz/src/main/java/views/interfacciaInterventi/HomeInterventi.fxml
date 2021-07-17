@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" stylesheets="@bootstrap3.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button contentDisplay="BOTTOM" graphicTextGap="9.0" layoutX="124.0" layoutY="173.0" mnemonicParsing="false" prefHeight="136.0" prefWidth="158.0" text="AGGIUNGI">
+         <graphic>
+            <ImageView fitHeight="97.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icon_aggiungiIntervento.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Label graphicTextGap="0.0" layoutX="261.0" layoutY="51.0" prefHeight="31.0" prefWidth="198.0" text="Interventi di Pulizia" textFill="#6b9239">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Button contentDisplay="BOTTOM" graphicTextGap="9.0" layoutX="459.0" layoutY="171.0" mnemonicParsing="false" prefHeight="136.0" prefWidth="158.0" text="VEDI PASSATI">
+         <graphic>
+            <ImageView fitHeight="97.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icon_vediInterventi.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

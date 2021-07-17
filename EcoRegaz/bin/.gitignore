@@ -4,5 +4,12 @@
 /persisters/
 /view/
 /pattume/
+<<<<<<< HEAD
 /resources.class
 /resources/
+=======
+/application/
+/resources/
+/main/
+/test/
+>>>>>>> branch 'master' of https://github.com/Lombax99/ERMS.git
