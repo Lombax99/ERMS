@@ -1,6 +1,7 @@
 package main.java.persisters.strumenti.deposito;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import main.java.models.deposito.Deposito;
 
@@ -10,12 +11,12 @@ import main.java.models.deposito.Deposito;
  */
 public interface IPersisterDeposito {
 	
-	public ResultSet visualizzaDepositi();
+	public ResultSet visualizzaDepositi() throws SQLException;
 	
-	public boolean aggiuntaDeposito(Deposito deposito);
+	public boolean aggiuntaDeposito(Deposito deposito) throws SQLException;
 	
-	public boolean rimuoviDeposito(String id_deposito);
+	public boolean rimuoviDeposito(String id_deposito) throws SQLException;
 	
-	public boolean modificaDeposito(Deposito deposito);
+	public boolean modificaDeposito(Deposito deposito) throws SQLException;
 	
 }
