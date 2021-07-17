@@ -10,7 +10,7 @@ package main.java.application;
  * @author Umberto Salsi <salsi@icosaedro.it>
  * @version 2020-01-24
  */
-public class CodiceFiscale {
+public class CodiceFiscale { 
 	
 	/**
 	 * Normalizes a CF by removing white spaces and converting to upper-case.

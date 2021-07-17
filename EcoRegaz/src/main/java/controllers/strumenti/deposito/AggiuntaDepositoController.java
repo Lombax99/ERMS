@@ -15,7 +15,7 @@ public class AggiuntaDepositoController {
 	if(dep.getDescrizione().isBlank())
 		AlertPanel.saysError("Descrizione vuota non accettabile",  e );
 		
-	if(dep.getDescrizione().length() > )
+	if(dep.getDescrizione().length() > , )
 		AlertPanel.saysError("Descrizione vuota non accettabile",  e );
 		
 	}
