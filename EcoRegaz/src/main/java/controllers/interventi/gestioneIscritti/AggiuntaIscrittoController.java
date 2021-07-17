@@ -64,7 +64,7 @@ public class AggiuntaIscrittoController {
 		} catch (SQLException e) {
 			
 			//lancio messaggio di errore
-			AlertPanel.saysError("Errore DB iscritti", e);
+			AlertPanel.saysError("Errore nell'aggiunta DB iscritti", e);
 		}
 		
 		return false;
