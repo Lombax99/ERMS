@@ -10,6 +10,14 @@ public class AggiuntaIscrittoController {
 	
 	public boolean aggiungi(Iscritto iscritto) {
 		
+		//controllo parametri null
+		if(iscritto.getNome().equals(null) || iscritto.getCognome().equals(null) || iscritto.getCodFisc().equalsIgnoreCase(null))
+		{
+			AlertPanel.saysInfo("ERRORE", "Uno dei campi inseriti è null");
+			return false;
+		}
+		
+		
 		//rimozione spazi inizio e fine stringa e controllo delle stringhe vuote
 		if(iscritto.getNome().strip().isEmpty() || iscritto.getCognome().strip().isEmpty() || iscritto.getCodFisc().strip().isEmpty())
 		{
@@ -67,6 +75,8 @@ public class AggiuntaIscrittoController {
 			AlertPanel.saysError("Errore nell'aggiunta DB iscritti", e);
 		}
 		
+		//non dovrei mai arrivare qua
+		AlertPanel.saysInfo("ERRORE", "qualcosa è andato storto nell'aggiungi");
 		return false;
 	}
 }

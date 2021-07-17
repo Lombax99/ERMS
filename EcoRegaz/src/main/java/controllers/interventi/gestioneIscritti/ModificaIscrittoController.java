@@ -10,6 +10,15 @@ public class ModificaIscrittoController {
 
 	public boolean modifica(Iscritto iscritto)
 	{
+		
+		//controllo parametri null
+		if(iscritto.getNome().equals(null) || iscritto.getCognome().equals(null) || iscritto.getCodFisc().equalsIgnoreCase(null))
+		{
+			AlertPanel.saysInfo("ERRORE", "Uno dei campi inseriti è null");
+			return false;
+		}
+		
+		
 		//rimozione spazi inizio e fine stringa e controllo delle stringhe vuote
 		if(iscritto.getNome().strip().isEmpty() || iscritto.getCognome().strip().isEmpty())
 		{
