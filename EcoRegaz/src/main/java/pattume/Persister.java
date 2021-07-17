@@ -1,11 +1,12 @@
 package main.java.pattume;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import main.java.persisters.MainDB;
 
 public class Persister {
 
@@ -39,56 +40,13 @@ public class Persister {
 		 */
 		statement = connection.createStatement();
 
-		if (!tableExists(connection)) {
+		if (!MainDB.tableExists(connection, "queryUpdate")) {
 			statement.execute("CREATE TABLE INTERVENTI(ID_INTERVENTO INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY," + "		AREAVERDE VARCHAR(254) NOT NULL)");
 		}
 
 	}
 
-	/**
-	 * Controlla l'esistenza della tabella. Viene eseguita una UPDATE fittizzia (nessuna riga viene selezionata quindi la update non cambia nulla)
-	 * 
-	 * @param connessione
-	 * @return true, se la tabella esiste, false altrimenti
-	 * @throws SQLException
-	 */
-	private boolean tableExists(Connection connessione) throws SQLException {
 
-		try {
-			connessione.createStatement().execute("UPDATE RICETTE_TABLE " + "SET NOME_RICETTA = 'TEST ENTRY' " + "WHERE PORTATA = 'test' AND PORZIONI = 0");
-		} catch (SQLException sqle) {
-
-			/*
-			 *  Se lo stato è "42X05" la tabella NON ESISTE
-			 */
-			if (sqle.getSQLState().equals("42X05")) {
-
-				return false;
-			}
-
-			/*
-			 *  Se lo stato è "42X14" o "42821", la tabella è definita incorrettamente
-			 */
-			else if (sqle.getSQLState().equals("42X14") || sqle.getSQLState().equals("42821")) {
-
-				System.out.println("Incorrect table definition. Drop RICETTARIO_TABLE and rerun this program");
-				throw sqle;
-			}
-
-			/*
-			 * altrimenti...
-			 */
-			else {
-				System.out.println("Unhandled SQLException");
-				throw sqle;
-			}
-		}
-
-		/*
-		 * Se nessuna eccezione viene lanciata, la tabella esiste già.
-		 */
-		return true;
-	}
 
 	/*
 	 * 2) SELECT
@@ -187,25 +145,6 @@ public class Persister {
 	}
 	
 	
-	
-	
-	/*
-	 * Di base si fa una select prima di una visualizza. Si può usare il result set per inserire e eliminare e modificare una riga.
-	 * Bisogna metterlo scrollable e updatable (vedi doc del ResultSet).
-	 * Tuttavia ogni ResultSet muore quando viene chiuso lo Statement da cui proviene, oppure può essere chiuso manualmente.
-	 * Quindi è importante che lo Statement rimanga vivo al di fuori del metodo, quindi che sia globale.
-	 * 
-	 * Tutte le volte che si vuole modificare un ResultSet, questo deve essere chiuso (così viene fatto un autoCommit, se abilitato).
-	 * Per visualizzare i dati modificati, bisogna effettuare una seconda select e visualizzare i dati dal nuovo ResultSet.
-	 * 
-	 * Nel caso io voglia visualizzare gli iscritti e poi andare da un'altra parte, devo fare la select, caricare in grafica i dati dal ResultSet,
-	 * 		e poi posso chiudere il resultSet se esco dalla ViewIscritti. In questo modo rimane caricata in memoria solo la grafica.
-	 * Nel caso in cui poi voglia tornare a vedere gli iscritti e modificarli, poiché non c'è più il ResultSet, posso o chiamare la funzione che direttamente 
-	 * 		fa UPDATE/INSERT/DELETE al DB e poi chiamare la select per vedere il risultato, oppure chiamare la select per modificare il ResultSet e richiamarla per vedere il risultato.
-	 * Sinceramente a me piace il secondo caso, perché nel primo bisogna chiamare il metodo per ogni singola modifica, mentre nel secondo solo una volta.
-	 * 
-	 * In generale quindi, ogni volta che si esce da una view, si chiude il ResultSet. Quindi è possibile in questo modo usare uno Statement per ogni Persister,
-	 * 		anche per motivi di estendibilità.
-	 */
+
 
 }
