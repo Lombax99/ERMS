@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.java.application.AlertPanel;
 import main.java.application.Main;
+import main.java.controllers.backup.BackupController;
 import main.java.controllers.login.LoginController;
 import main.java.persisters.MainDB;
 import main.java.views.interfacciaHome.HomePrincipale;
@@ -59,7 +60,9 @@ public class HomeLogin {
 	 * 1) Load di HomePrincipale <br>
 	 * 2) Creazione della Scene di HomePrincipale <br>
 	 * 3) Set della Scene nel primaryStage <br>
-	 * 4) Settaggio del database: connessione e impostazioni alla chiusura <br>
+	 * 4) Connessione con database <br>
+	 * 5) Settaggio in chiusura del primaryStage: avvio backup <br>
+	 * 6) Settaggio in chiusura del primaryStage: chiusura del database
 	 */
 	private void initHomePrincipale() {
 		
@@ -103,6 +106,19 @@ public class HomeLogin {
 		 * Impostazioni DB alla chiusura del primaryStage
 		 */
 		primaryStage.setOnCloseRequest(event -> {
+			
+			/*
+			 * Avvio Backup
+			 */
+			try {
+				BackupController.getInstance().avviaBackup();
+			} catch(SQLException e) {
+				AlertPanel.saysError("ERRORE: in fase di backup del database", e);
+			}
+			
+			/*
+			 * Chiusura database
+			 */
 			try {
 				MainDB.closeDatabase();
 			} catch (SQLException e) {
