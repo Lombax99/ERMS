@@ -12,18 +12,23 @@ public class AggiuntaDepositoController {
 
 		IllegalArgumentException illegal = new IllegalArgumentException();
 		
-	if(dep.getDescrizione().isBlank())
-		AlertPanel.saysError("Descrizione vuota non accettabile",  illegal );
+		if(dep.getDescrizione().equals(null) || dep.getStrumentiExtra().equals(null))
+			AlertPanel.saysError("Parametri null non accettabili",  illegal);
 		
-	else if(dep.getDescrizione().length() > 250 || dep.getStrumentiExtra().length() > 250 )
-		AlertPanel.saysError("Descrizione troppo lunga",  illegal );
+		else if(dep.getDescrizione().strip().isBlank())
+			AlertPanel.saysError("Descrizione vuota non accettabile",  illegal);
 		
-	else try{
-		if ( PersisterDeposito.getInstance().aggiuntaDeposito(dep))
-			return true;
-	} catch(SQLException e) {
-		AlertPanel.saysError("Errore nell'inserimento del deposito nel database", e);
-	}
-	return false;
+		else if(dep.getDescrizione().length() > 250 || dep.getStrumentiExtra().length() > 250 )
+			AlertPanel.saysError("Descrizione troppo lunga",  illegal );
+			
+		else 
+			try{
+				dep.getStrumentiExtra().strip();
+				if (PersisterDeposito.getInstance().aggiuntaDeposito(dep))
+				return true;
+			} catch(SQLException e) {
+				AlertPanel.saysError("Errore nell'inserimento del deposito nel database", e);
+			}
+		return false;
 	}
 }

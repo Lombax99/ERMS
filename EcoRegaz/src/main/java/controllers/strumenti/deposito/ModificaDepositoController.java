@@ -13,7 +13,10 @@ public class ModificaDepositoController {
 
 		IllegalArgumentException illegal = new IllegalArgumentException();
 
-		if (dep.getDescrizione().isBlank())
+		if(dep.getDescrizione().equals(null) || dep.getStrumentiExtra().equals(null))
+			AlertPanel.saysError("Parametri null non accettabili",  illegal);
+		
+		else if (dep.getDescrizione().strip().isBlank())
 			AlertPanel.saysError("Descrizione vuota non accettabile", illegal);
 
 		else if (dep.getDescrizione().length() > 250 || dep.getStrumentiExtra().length() > 250)
@@ -21,6 +24,7 @@ public class ModificaDepositoController {
 
 		else
 			try {
+				dep.getStrumentiExtra().strip();
 				if (PersisterDeposito.getInstance().modificaDeposito(dep))
 					return true;
 			} catch (SQLException e) {
