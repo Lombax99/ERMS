@@ -46,7 +46,7 @@ public class BackupController {
 	public void avviaBackup() throws SQLException {
 
 		if (backupDaFare) {
-			String backupDirectory = System.getProperty("user.home") + "/AppData/Local/ERMS/backups";
+			String backupDirectory = "./backups";
 			CallableStatement cs = MainDB.connection.prepareCall("CALL SYSCS_UTIL.SYSCS_BACKUP_DATABASE(?)");
 			cs.setString(1, backupDirectory);
 			cs.execute();
