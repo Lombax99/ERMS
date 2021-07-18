@@ -24,7 +24,7 @@ try{
 }
 return false;
 }
-
+ 
 
 public boolean rimozioneStrumento(int ID_Pinza) {
 	try{
