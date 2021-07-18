@@ -13,7 +13,6 @@ import main.java.persisters.strumenti.pinze.PersisterPinze;
 public class GestionePinzeController  implements IGestioneStrumentiController{
 
 
-
 public boolean aggiuntaNuovoStrumento(Pinza strumento) {
 
 try{
