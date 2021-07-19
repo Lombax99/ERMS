@@ -2,7 +2,7 @@ package main.java.controllers.interventi.gestioneInterventi;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Iterator;
+//import java.util.Iterator;		//serve nei controlli commentati
 
 import main.java.application.AlertPanel;
 import main.java.models.areaVerde.AreaVerde;
@@ -45,6 +45,12 @@ public class AggiuntaInterventoController {
 			AlertPanel.saysInfo("ERRORE", "La descrizione inserita è vuota");
 			return false;
 		}
+		
+		/*
+		 * TODO 
+		 * controllo anti SQLInjection descrizioneValutativa 
+		 */
+		
 		if(intervento.getGravità() > 5 || intervento.getGravità() < 1)
 		{
 			AlertPanel.saysInfo("ERRORE", "La gravità inserita è scorretta: deve essere compresa tra 1 e 5");
@@ -84,11 +90,24 @@ public class AggiuntaInterventoController {
 			AlertPanel.saysInfo("ERRORE", "L'area verde inserita è vuota");
 			return false;
 		}
+		
+		/*
+		 * TODO 
+		 * controllo anti SQLInjection nome areaVerde 
+		 */
+		
 		if(areaVerde.getGeoPoint().strip().isEmpty() || areaVerde.getGeoPoint().equals(null))
 		{
 			AlertPanel.saysInfo("ERRORE", "Le coordinate dell'area verde sono vuote");
 			return false;
 		}
+		//controllo anti SQLInjection
+		if(areaVerde.getGeoPoint().contains("'"))
+		{
+			AlertPanel.saysInfo("ERRORE", "Le coordinate dell'area verde non possono contenere apici");
+			return false;
+		}
+		
 		if(areaVerde.getQuartiere() == null)
 		{
 			AlertPanel.saysInfo("ERRORE", "Il quartiere è null");
