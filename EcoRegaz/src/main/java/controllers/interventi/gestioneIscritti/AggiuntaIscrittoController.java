@@ -75,7 +75,7 @@ public class AggiuntaIscrittoController {
 			AlertPanel.saysError("Errore nell'aggiunta DB iscritti", e);
 		}
 		
-		//non dovrei mai arrivare qua
+		//se l'aggiunta restituisce false
 		AlertPanel.saysInfo("ERRORE", "qualcosa è andato storto nell'aggiungi");
 		return false;
 	}

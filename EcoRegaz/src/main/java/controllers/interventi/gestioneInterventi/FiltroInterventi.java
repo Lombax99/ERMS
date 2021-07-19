@@ -101,6 +101,7 @@ public class FiltroInterventi {
 			/*
 			 * TODO
 			 * controllo anti SQLInjection
+			 * vedi prepared statement
 			 */
 			
 			if(descrizione.length() > 50)

@@ -11,5 +11,7 @@ import main.java.models.areaVerde.AreaVerde;
 public interface IPersisterAreeVerdi {
 
 	public List<AreaVerde> visualizzaAreeVerdi(String nomeAreaVerde);
+	
+	public boolean aggiuntaAreaVerde(AreaVerde areaVerde);
 
 }

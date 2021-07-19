@@ -6,5 +6,9 @@ public class ModificaInterventoController {
 
 	public boolean modifica(Intervento intervento) {
 		
+		
+		
+		return true;
+		
 	}
 }

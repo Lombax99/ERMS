@@ -16,8 +16,6 @@ public interface IPersisterInterventiAreeVerdi {
 	
 	public boolean aggiuntaIntervento(Intervento intervento);
 	
-	public boolean aggiuntaAreaVerde(AreaVerde areaVerde);
-	
 	public boolean rimuoviIntervento(LocalDate date, String nomeAreaVerde);
 	
 	public boolean modificaIntervento(Intervento intervento);

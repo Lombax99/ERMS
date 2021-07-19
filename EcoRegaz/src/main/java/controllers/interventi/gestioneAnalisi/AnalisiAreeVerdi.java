@@ -17,5 +17,7 @@ public class AnalisiAreeVerdi {
 	
 	public static List<AreaVerde> elaboraAnalisi(FiltroInterventi filtro) {
 		
+		return null;
+		
 	}
 }
