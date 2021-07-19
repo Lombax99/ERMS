@@ -42,7 +42,7 @@ public class GestioneScatoleGuantiController  implements IGestioneStrumentiContr
 	
 	public boolean modificaDatiStrumento(ScatolaGuanti strumento) {
 		try{
-			if (PersisterSscatoleGuanti.getInstance().modificaDatiScatola(strumento))
+			if (PersisterScatoleGuanti.getInstance().modificaDatiScatola(strumento))
 			return true;
 		} catch(SQLException e) {
 			AlertPanel.saysError("Errore nella modifica dello strumento nel database", e);
