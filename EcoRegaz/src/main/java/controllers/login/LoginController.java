@@ -10,7 +10,7 @@ import main.java.persisters.logPersister.PersisterLog;
  */
 public class LoginController {
 
-	private PersisterLog persisterReference;
+	private PersisterLog persisterReference;		//unico persister non singleton
 	
 	/* 
 	 * Stringa fake value per il funzionamento del prototipo
