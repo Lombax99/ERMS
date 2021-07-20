@@ -88,7 +88,7 @@ public class HomeLogin {
 		AnchorPane homePrincipale = null;
 		try {
 			homePrincipale = FXMLLoader.<AnchorPane>load(getClass().getResource(homePrincipaleURL), null, null, e -> {
-				return new HomePrincipale();
+				return new HomePrincipale(primaryStage);
 			});
 		} catch (IOException e) {
 			AlertPanel.saysError("ERRORE: nella load di HomePrincipale", e);
