@@ -1,15 +1,15 @@
-package main.java.views.interfacciaDeposito;
+package main.java.views.interfacciaDepositi;
 
 import main.java.controllers.strumenti.deposito.*;
 
-public class HomeDeposito {
+public class HomeDepositi {
 
 	private AggiuntaDepositoController aggDepController;
 	private ElencoDepositiController viewDepController;
 	private ModificaDepositoController modDepController;
 	private RimozioneDepositoController elimDepController;
 	
-	public HomeDeposito(AggiuntaDepositoController aggDepController, ElencoDepositiController viewDepController,
+	public HomeDepositi(AggiuntaDepositoController aggDepController, ElencoDepositiController viewDepController,
 			ModificaDepositoController modDepController, RimozioneDepositoController elimDepController) {
 		this.aggDepController = aggDepController;
 		this.viewDepController = viewDepController;
