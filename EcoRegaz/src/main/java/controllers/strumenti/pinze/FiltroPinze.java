@@ -39,7 +39,12 @@ public class FiltroPinze {
 		return condizione;
 	}
 
-	public boolean setId_Deposito(int id_Deposito) {
+	public boolean setId_Deposito(Integer id_Deposito) {
+		if (id_Deposito == null)
+		{
+			this.id_Deposito = Optional.empty();
+			return true;
+		}
 		if (id_Deposito > 0) {
 			this.id_Deposito = Optional.of(id_Deposito);
 			return true;
@@ -50,12 +55,15 @@ public class FiltroPinze {
 		}
 	}
 
-	public boolean setId_Pinza(int id_Pinza) {
-
+	public boolean setId_Pinza(Integer id_Pinza) {
+		if (id_Pinza == null)
+		{
+			this.id_Pinza = Optional.empty();
+			return true;
+		}
 		if (id_Pinza > 0) {
 			this.id_Pinza = Optional.of(id_Pinza);
 			return true;
-			
 		} else {
 			AlertPanel.saysInfo("ERRORE", "id_Pinza deve essere positivo");
 			this.id_Pinza = Optional.empty();
@@ -74,7 +82,6 @@ public class FiltroPinze {
 	}
 
 	public boolean setCondizione(Condizione condizione) {
-
 		if (condizione != null) {
 			this.condizione = Optional.of(condizione);
 			return true;
@@ -82,7 +89,6 @@ public class FiltroPinze {
 			this.condizione = Optional.empty();
 			return false;
 		}
-
 	}
 
 }
