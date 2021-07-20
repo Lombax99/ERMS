@@ -19,12 +19,11 @@ public class ModificaDepositoController {
 		else if (dep.getDescrizione().strip().isBlank())
 			AlertPanel.saysError("Descrizione vuota non accettabile", illegal);
 
-		else if (dep.getDescrizione().length() > 250 || dep.getStrumentiExtra().length() > 250)
+		else if (dep.getDescrizione().length() > 250 || dep.getStrumentiExtra().strip().length() > 250)
 			AlertPanel.saysError("Descrizione o StrumentiEntra troppo lunghi", illegal);
 
 		else
 			try {
-				dep.getStrumentiExtra().strip();
 				if (PersisterDeposito.getInstance().modificaDeposito(dep))
 					return true;
 			} catch (SQLException e) {

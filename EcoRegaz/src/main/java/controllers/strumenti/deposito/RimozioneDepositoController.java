@@ -14,6 +14,12 @@ public class RimozioneDepositoController {
 		if(dep.getDescrizione().equals(null) || dep.getStrumentiExtra().equals(null))
 			AlertPanel.saysError("Parametri null non accettabili",  illegal);
 		
+		else if(dep.getDescrizione().strip().isBlank())
+			AlertPanel.saysError("Descrizione vuota non accettabile",  illegal);
+		
+		else if(dep.getDescrizione().length() > 250 || dep.getStrumentiExtra().strip().length() > 250 )
+			AlertPanel.saysError("Descrizione troppo lunga",  illegal );
+		
 		else try{
 				if (PersisterDeposito.getInstance().rimuoviDeposito(dep.getId_Deposito()))
 				{
