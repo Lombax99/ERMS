@@ -49,5 +49,15 @@ public class Intervento {
 	public int getGravità() {
 		return gravità;
 	}
+	
+	
+	public String getPartecipantiString(){
+		String stringa = "";
+		
+		for(String cf: elencoCFPartecipanti) {
+			stringa.concat(cf + ";");
+		}
+		return stringa;
+	}
 
 }
