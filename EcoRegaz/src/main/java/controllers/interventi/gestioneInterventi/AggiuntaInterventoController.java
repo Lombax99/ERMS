@@ -1,5 +1,6 @@
 package main.java.controllers.interventi.gestioneInterventi;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 //import java.util.Iterator;		//serve nei controlli commentati
@@ -54,6 +55,30 @@ public class AggiuntaInterventoController {
 		if(intervento.getGravità() > 5 || intervento.getGravità() < 1)
 		{
 			AlertPanel.saysInfo("ERRORE", "La gravità inserita è scorretta: deve essere compresa tra 1 e 5");
+			return false;
+		}
+		
+		//controllo che non ci sia un intervento già presente con stessa data e luogo
+		FiltroInterventi filtro = new FiltroInterventi();
+		filtro.setDataFine(intervento.getDataIntervento());
+		filtro.setDataInizio(intervento.getDataIntervento());
+		filtro.setIdGestionaleAreaVerde(intervento.getId_GestionaleAreaVerde());
+		
+		ResultSet check;
+		try {
+			check = PersisterInterventi.getInstance().visualizzaInterventi(filtro);
+		} catch (SQLException e2) {
+			AlertPanel.saysError("Errore visualizza interventi del controllo aggiunta interventi per key duplicate", e2);
+			return false;
+		}
+		try {
+			if(!check.next())
+			{
+				AlertPanel.saysInfo("ERRORE", "Esiste un intervento con stessa data e luogo nel DB");
+				return false;
+			}
+		} catch (SQLException e1) {
+			AlertPanel.saysError("ERRORE funzione:next aggiuntaInterventoController", e1);
 			return false;
 		}
 		

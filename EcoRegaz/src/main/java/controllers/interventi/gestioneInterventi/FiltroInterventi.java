@@ -22,9 +22,15 @@ public class FiltroInterventi {
 	private Optional<Quartiere> quartiere;
 	private Optional<String> nomeArea;
 	private Optional<String> descrizione;
+	private Optional<Integer> idGestionaleAreaVerde;
 	
 	public void FiltroIscritti() {
-		
+		this.dataInizio = Optional.empty();
+		this.dataFine = Optional.empty();
+		this.quartiere = Optional.empty();
+		this.nomeArea = Optional.empty();
+		this.descrizione = Optional.empty();
+		this.idGestionaleAreaVerde = Optional.empty();
 	}
 
 	public Optional<LocalDate> getDataInizio() {
@@ -46,7 +52,6 @@ public class FiltroInterventi {
 	public Optional<String> getDescrizione() {
 		return descrizione;
 	}
-
 	
 	/*
 	 * Le seguenti funzioni ritornano:
@@ -55,6 +60,10 @@ public class FiltroInterventi {
 	 * errore in alertPanel in caso di errori (ad esempio per una descirzione troppo lunga)
 	 */
 	
+	public Optional<Integer> getIdGestionaleAreaVerde() {
+		return idGestionaleAreaVerde;
+	}
+
 	public boolean setDescrizione(String descrizione) {
 		if(descrizione.strip().isEmpty() || descrizione.equals(null))
 		{
@@ -131,5 +140,17 @@ public class FiltroInterventi {
 			return true;
 		}
 	}
-	
+
+	public boolean setIdGestionaleAreaVerde(Integer idGestionaleAreaVerde) {
+		if(idGestionaleAreaVerde == null)
+		{
+			this.idGestionaleAreaVerde = Optional.empty();
+			return false;
+		}
+		else
+		{
+			this.idGestionaleAreaVerde = Optional.of(idGestionaleAreaVerde);
+			return true;
+		}
+	}
 }
