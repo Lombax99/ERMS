@@ -36,39 +36,48 @@ public class FiltroPinze {
 		return condizione;
 	}
 
-	public void setId_Deposito(int id_Deposito) {
+	public boolean setId_Deposito(int id_Deposito) {
 		if (id_Deposito > 0) {
 			this.id_Deposito = Optional.of(id_Deposito);
+			return true;
 		} else {
 			AlertPanel.saysInfo("ERRORE", "id_Deposito deve essere positivo");
 			this.id_Deposito = Optional.empty();
+			return false;
 		}
 	}
 
-	public void setId_Pinza(int id_Pinza) {
+	public boolean setId_Pinza(int id_Pinza) {
 
 		if (id_Pinza > 0) {
 			this.id_Pinza = Optional.of(id_Pinza);
+			return true;
+			
 		} else {
 			AlertPanel.saysInfo("ERRORE", "id_Pinza deve essere positivo");
 			this.id_Pinza = Optional.empty();
+			return false;
 		}
 	}
 
-	public void setAppartenenza(Appartenenza appartenenza) {
+	public boolean setAppartenenza(Appartenenza appartenenza) {
 		if (appartenenza != null) {
 			this.appartenenza = Optional.of(appartenenza);
+			return true;
 		} else {
 			this.appartenenza = Optional.empty();
+			return false;
 		}
 	}
 
-	public void setCondizione(Condizione condizione) {
+	public boolean setCondizione(Condizione condizione) {
 
 		if (condizione != null) {
 			this.condizione = Optional.of(condizione);
+			return true;
 		} else {
 			this.condizione = Optional.empty();
+			return false;
 		}
 
 	}
