@@ -7,7 +7,7 @@ public class AreaVerde {
 	private String nome;
 	private String geoPoint;
 	
-	public AreaVerde(int id_GestionaleAreaVerde, Quartiere quartiere, String nome, String geoPoint) {
+	public AreaVerde(int id_GestionaleAreaVerde, String nome, String geoPoint, Quartiere quartiere) {
 		this.id_GestionaleAreaVerde = id_GestionaleAreaVerde;
 		this.quartiere = quartiere;
 		this.nome = nome;
