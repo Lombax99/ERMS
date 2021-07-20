@@ -6,16 +6,24 @@ import java.time.LocalDate;
 //import java.util.Iterator;		//serve nei controlli commentati
 
 import main.java.application.AlertPanel;
+import main.java.controllers.gestioneAreeVerdi.AggiuntaAreaVerdeController;
 import main.java.models.areaVerde.AreaVerde;
 import main.java.models.intervento.Intervento;
 import main.java.persisters.areeVerdi.PersisterAreeVerdi;
 import main.java.persisters.interventi.PersisterInterventi;
 
 public class AggiuntaInterventoController {
+	
+	private AggiuntaAreaVerdeController aggAreaVerdeController;
+	
+	public void AggiuntaInterventoController()
+	{
+		this.aggAreaVerdeController = new AggiuntaAreaVerdeController();
+	}
 
 	public boolean aggiuntaIntervento(Intervento intervento, AreaVerde areaVerde) {
 		
-		this.aggiuntaAreaVerde(areaVerde);
+		aggAreaVerdeController.aggiuntaAreaVerde(areaVerde);
 		
 		//controlli dell'imput
 		if(intervento == null)
@@ -99,63 +107,5 @@ public class AggiuntaInterventoController {
 			//se l'aggiungi restituisce false
 			AlertPanel.saysInfo("ERRORE", "qualcosa è andato storto nell'aggiungi intervento");
 			return false;
-	}
-	
-	
-	
-	
-	public boolean aggiuntaAreaVerde(AreaVerde areaVerde) {
-		
-		//controlli dell'imput
-		if(areaVerde == null)
-		{
-			AlertPanel.saysInfo("ERRORE", "L'area verde inserita è null");
-			return false;
-		}
-		if(areaVerde.getNome().strip().isEmpty() || areaVerde.getNome().equals(null))
-		{
-			AlertPanel.saysInfo("ERRORE", "L'area verde inserita è vuota");
-			return false;
-		}
-		
-		/*
-		 * TODO 
-		 * controllo anti SQLInjection nome areaVerde 
-		 */
-		
-		if(areaVerde.getGeoPoint().strip().isEmpty() || areaVerde.getGeoPoint().equals(null))
-		{
-			AlertPanel.saysInfo("ERRORE", "Le coordinate dell'area verde sono vuote");
-			return false;
-		}
-		//controllo anti SQLInjection
-		if(areaVerde.getGeoPoint().contains("'"))
-		{
-			AlertPanel.saysInfo("ERRORE", "Le coordinate dell'area verde non possono contenere apici");
-			return false;
-		}
-		
-		if(areaVerde.getQuartiere() == null)
-		{
-			AlertPanel.saysInfo("ERRORE", "Il quartiere è null");
-			return false;
-		}
-		
-		
-		//evocazione persister normale
-		try {
-			if(PersisterAreeVerdi.getInstance().aggiuntaAreaVerde(areaVerde))
-			{
-				return true;
-			}
-		} catch (SQLException e) {
-			
-			//lancio messaggio di errore
-			AlertPanel.saysError("Errore nell'aggiunta DB area verde", e);
-		}
-		
-		//se l'aggiungi restituisce false
-		AlertPanel.saysInfo("ERRORE", "qualcosa è andato storto nell'aggiungi area verde");
-		return false;
 	}
 }
