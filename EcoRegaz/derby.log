@@ -1,0 +1,15 @@
+----------------------------------------------------------------
+Wed Jul 21 00:26:08 CEST 2021D001 : [0] The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585), [1] a816c00e-017a-c606-bb51-000002a378e8, [2] C:\Users\evang\git\ERMS\EcoRegaz\ERMS_DB, [3] jdk.internal.loader.ClassLoaders$AppClassLoader@6f539caf, [4] file:/C:/Users/evang/git/ERMS/EcoRegaz/lib/derby_DB/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=13+33
+user.dir=C:\Users\evang\git\ERMS\EcoRegaz
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+C005 : [0] 
+----------------------------------------------------------------
+J003 : [0] Wed Jul 21 00:26:13 CEST 2021
+----------------------------------------------------------------
+Wed Jul 21 00:26:13 CEST 2021D002 : [0] a816c00e-017a-c606-bb51-000002a378e8, [1] C:\Users\evang\git\ERMS\EcoRegaz\ERMS_DB, [2] jdk.internal.loader.ClassLoaders$AppClassLoader@6f539caf
+----------------------------------------------------------------
