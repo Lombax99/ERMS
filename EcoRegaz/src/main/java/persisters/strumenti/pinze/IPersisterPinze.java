@@ -1,7 +1,9 @@
 package main.java.persisters.strumenti.pinze;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import main.java.controllers.strumenti.pinze.FiltroPinze;
 import main.java.models.strumenti.pinza.Pinza;
 
 /**
@@ -10,12 +12,12 @@ import main.java.models.strumenti.pinza.Pinza;
  */
 public interface IPersisterPinze {
 	
-	public ResultSet elencoPinze();
+	public ResultSet elencoPinze(FiltroPinze filtro) throws SQLException;
 	
-	public boolean aggiuntaNuovaPinza(Pinza pinza);
+	public boolean aggiuntaNuovaPinza(Pinza pinza) throws SQLException;
 	
-	public boolean rimozionePinza(int id_Pinza);
+	public boolean rimozionePinza(int id_Pinza) throws SQLException;
 	
-	public boolean modificaDatiPinza(Pinza pinza);
+	public boolean modificaDatiPinza(Pinza pinza) throws SQLException;
 
 }

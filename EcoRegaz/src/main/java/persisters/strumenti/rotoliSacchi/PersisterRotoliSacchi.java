@@ -1,4 +1,4 @@
-package main.java.persisters.strumenti.scatoleGuanti;
+package main.java.persisters.strumenti.rotoliSacchi;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,14 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import main.java.models.strumenti.scatolaGuanti.ScatolaGuanti;
+import main.java.models.strumenti.rotoloSacchi.RotoloSacchi;
 import main.java.persisters.MainDB;
 
 /**
- * Classe che implementa i metodi per l'interazione con DB circa i guanti
+ * Classe che implementa i metodi per l'interazione con DB circa i sacchi
  *
  */
-public class PersisterScatoleGuanti implements IPersisterScatoleGuanti {
+public class PersisterRotoliSacchi implements IPersisterRotoliSacchi {
 
 	/**
 	 * Variabile che identifica la connessione con il DB.
@@ -28,14 +28,13 @@ public class PersisterScatoleGuanti implements IPersisterScatoleGuanti {
 	/**
 	 * Stringa che contiene la creazione della tabella
 	 */
-	private static String createTable = "CREATE TABLE GUANTI_TABLE (ID_STRUMENTO INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY, "
-				+ " TAGLIA VARCHAR(5) NOT NULL CHECK(TAGLIA = 'XS' OR TAGLIA = 'S' OR TAGLIA = 'M' OR TAGLIA = 'L' OR TAGLIA = 'XL' ), "
+	private static String createTable = "CREATE TABLE SACCHI_TABLE (ID_STRUMENTO INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY, "
 				+ " ID_DEPOSITO INTEGER NOT NULL REFERENCES DEPOSITI_TABLE(ID_DEPOSITO))";
 
 	/*
 	 * Pattern Singleton
 	 */
-	private static PersisterScatoleGuanti instance = null;
+	private static PersisterRotoliSacchi instance = null;
 
 	/**
 	 * Pattern Singleton. <br>
@@ -43,9 +42,9 @@ public class PersisterScatoleGuanti implements IPersisterScatoleGuanti {
 	 * 
 	 * @throws SQLException
 	 */
-	public static PersisterScatoleGuanti getInstance() throws SQLException {
+	public static PersisterRotoliSacchi getInstance() throws SQLException {
 		if (instance == null) {
-			instance = new PersisterScatoleGuanti();
+			instance = new PersisterRotoliSacchi();
 		}
 		return instance;
 	}
@@ -58,7 +57,7 @@ public class PersisterScatoleGuanti implements IPersisterScatoleGuanti {
 	 * 
 	 * @throws SQLException
 	 */
-	private PersisterScatoleGuanti() throws SQLException {
+	private PersisterRotoliSacchi() throws SQLException {
 
 		/*
 		 * Prelevo la connessione da MainDB, il quale sicuramente è già stato inizializzato
@@ -66,7 +65,7 @@ public class PersisterScatoleGuanti implements IPersisterScatoleGuanti {
 		connection = MainDB.connection;
 
 		if (connection == null) {
-			throw new SQLException("Costruttore PersisterScatoleGuanti: Connessione con DB non stabilita");
+			throw new SQLException("Costruttore PersisterRotoliSacchi: Connessione con DB non stabilita");
 		}
 
 		/*
@@ -75,42 +74,42 @@ public class PersisterScatoleGuanti implements IPersisterScatoleGuanti {
 		statement = connection.createStatement();
 
 		/*
-		 * Verifica dell'esistenza della tabella delle Pinze.
+		 * Verifica dell'esistenza della tabella dei Sacchi.
 		 * Se non esiste, viene creata
 		 */
-		if (!MainDB.tableExists(connection, "UPDATE GUANTI_TABLE SET TAGLIA = 'S' WHERE ID_STRUMENTO = -100 ")) {
+		if (!MainDB.tableExists(connection, "UPDATE SACCHI_TABLE SET ID_DEPOSITO = 1 WHERE ID_STRUMENTO = -100 ")) {
 			statement.execute(createTable);
 		}
 
 	}
 
 	/**
-	 * Metodo che restituisce un RestultSet contenente tutta la tabella dei guanti, insieme alla descrizione del deposito associato.
+	 * Metodo che restituisce un RestultSet contenente tutta la tabella dei sacchi , insieme alla descrizione del deposito associato.
 	 * 
 	 * @throws SQLException
 	 */
 	@Override
-	public ResultSet elencoScatole() throws SQLException {
-		String selectString = "SELECT 	G.ID_STRUMENTO, G.TAGLIA, D.ID_DEPOSITO, D.DESCRIZIONE " + "FROM 	GUANTI_TABLE G, DEPOSITI_TABLE D " + "WHERE	D.ID_DEPOSITO = G.ID_DEPOSITO";
+	public ResultSet elencoRotoli() throws SQLException {
+		String selectString = "SELECT 	S.ID_STRUMENTO, D.ID_DEPOSITO, D.DESCRIZIONE "
+					+ "FROM 	SACCHI_TABLE S, DEPOSITI_TABLE D "
+					+ "WHERE	D.ID_DEPOSITO = S.ID_DEPOSITO";
 
 		ResultSet resultSet = statement.executeQuery(selectString);
 
 		return resultSet;
 	}
 
-	
 	/**
-	 * Metodo che aggiunge una ScatolaGuanti al DB usando direttamente una query INSERT
+	 * Metodo che aggiunge un RotoloSacchi al DB usando direttamente una query INSERT
 	 * 
 	 * @throws SQLException
 	 */
 	@Override
-	public boolean aggiuntaNuovaScatola(ScatolaGuanti scatola) throws SQLException{
-		PreparedStatement psInsert = connection.prepareStatement("INSERT INTO GUANTI_TABLE (TAGLIA, ID_DEPOSITO) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
+	public boolean aggiuntaNuovaRotolo(RotoloSacchi rotolo) throws SQLException {
+		PreparedStatement psInsert = connection.prepareStatement("INSERT INTO SACCHI_TABLE (ID_DEPOSITO) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
 
 		// setto tutti i "?"
-		psInsert.setString(1, scatola.getTaglia().toString());
-		psInsert.setInt(2, scatola.getId_Deposito());
+		psInsert.setInt(1, rotolo.getId_Deposito());
 
 		// esecuzione effettiva dell'INSERT
 		if (psInsert.executeUpdate() != 1) {
@@ -123,19 +122,17 @@ public class PersisterScatoleGuanti implements IPersisterScatoleGuanti {
 		return true;
 	}
 
-	
 	/**
-	 * Metodo che rimuove una ScatolaGuanti dal DB usando direttamente una query DELETE
+	 * Metodo che rimuove un RotoloSacchi dal DB usando direttamente una query DELETE
 	 * 
 	 * @throws SQLException
 	 */
 	@Override
-	public boolean rimozioneScatola(int id_ScatolaGuanti) throws SQLException {
-
-		PreparedStatement psDelete = connection.prepareStatement("DELETE FROM GUANTI_TABLE WHERE ID_STRUMENTO = ?");
+	public boolean rimozioneRotolo(int id_Strumento) throws SQLException {
+		PreparedStatement psDelete = connection.prepareStatement("DELETE FROM SACCHI_TABLE WHERE ID_STRUMENTO = ?");
 
 		// setto tutti i "?"
-		psDelete.setInt(1, id_ScatolaGuanti);
+		psDelete.setInt(1, id_Strumento);
 
 		// esecuzione effettiva del DELETE
 		if (psDelete.executeUpdate() != 1) {
