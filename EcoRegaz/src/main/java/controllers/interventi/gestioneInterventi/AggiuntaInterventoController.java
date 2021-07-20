@@ -13,7 +13,9 @@ import main.java.persisters.interventi.PersisterInterventi;
 
 public class AggiuntaInterventoController {
 
-	public boolean aggiuntaIntervento(Intervento intervento) {
+	public boolean aggiuntaIntervento(Intervento intervento, AreaVerde areaVerde) {
+		
+		this.aggiuntaAreaVerde(areaVerde);
 		
 		//controlli dell'imput
 		if(intervento == null)
