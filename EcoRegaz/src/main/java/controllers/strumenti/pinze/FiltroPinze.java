@@ -17,7 +17,10 @@ public class FiltroPinze {
 	private Optional<Condizione> condizione;
 
 	public FiltroPinze() {
-
+		this.id_Deposito = Optional.empty();
+		this.id_Pinza = Optional.empty();
+		this.appartenenza = Optional.empty();
+		this.condizione = Optional.empty();
 	}
 
 	public Optional<Integer> getId_Deposito() {

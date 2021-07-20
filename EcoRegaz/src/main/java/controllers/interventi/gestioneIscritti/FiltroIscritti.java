@@ -19,7 +19,9 @@ public class FiltroIscritti {
 	
 	
 	public FiltroIscritti() {
-		
+		this.nome = Optional.empty();
+		this.cognome = Optional.empty();
+		this.codFisc = Optional.empty();
 	}
 
 
