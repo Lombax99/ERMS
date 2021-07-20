@@ -17,7 +17,7 @@ public class LoginController {
 	 * Sostituisce il file in cui verrà memorizzata la password reale
 	 * TODO
 	 */
-	private static final String password = "SuperUserPassword";
+	private static final String password = "pass";
 
 	/*
 	 * Costruttore
