@@ -21,29 +21,34 @@ public boolean aggiuntaAreaVerde(AreaVerde areaVerde) {
 			AlertPanel.saysInfo("ERRORE", "L'area verde inserita è vuota");
 			return false;
 		}
-		
-		/*
-		 * TODO 
-		 * controllo anti SQLInjection nome areaVerde 
-		 */
-		
+				
 		if(areaVerde.getGeoPoint().strip().isEmpty() || areaVerde.getGeoPoint().equals(null))
 		{
 			AlertPanel.saysInfo("ERRORE", "Le coordinate dell'area verde sono vuote");
 			return false;
 		}
+
+		if(areaVerde.getQuartiere() == null)
+		{
+			AlertPanel.saysInfo("ERRORE", "Il quartiere è null");
+			return false;
+		}
+		
 		//controllo anti SQLInjection
 		if(areaVerde.getGeoPoint().contains("'"))
 		{
 			AlertPanel.saysInfo("ERRORE", "Le coordinate dell'area verde non possono contenere apici");
 			return false;
 		}
-		
-		if(areaVerde.getQuartiere() == null)
+
+		//controllo anti SQLInjection		
+		if(areaVerde.getNome().contains("'"))
 		{
-			AlertPanel.saysInfo("ERRORE", "Il quartiere è null");
-			return false;
+			areaVerde.getNome().replace("'", "`");
 		}
+		
+		//conversione nome ad uppercase
+		areaVerde.getNome().toUpperCase();
 		
 		
 		//evocazione persister normale

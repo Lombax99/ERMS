@@ -9,11 +9,6 @@ import main.java.persisters.interventi.PersisterInterventi;
 public class RimozioneInterventoController {
 
 	public boolean rimuovi(int idIntervento) {
-				
-		/*
-		 * TODO 
-		 * controllo anti SQLInjection nomeAreaVerde 
-		 */
 		
 		//evocazione persister normale
 		try {

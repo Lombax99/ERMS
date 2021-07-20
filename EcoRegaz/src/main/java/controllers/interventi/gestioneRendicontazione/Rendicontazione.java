@@ -32,20 +32,19 @@ public class Rendicontazione {
 		Set<Intervento> interventi = new TreeSet<Intervento>();
 		int flag = 0;
 		try {
-			while(unsorted.next())
-			{
-			int ID_Gestionale = unsorted.getInt("ID_GESTIONALE");
-			String DescrizioneValutativa = unsorted.getString("DESCRIZIONE");
-			int gravità = unsorted.getInt("GRAVITA");
-			@SuppressWarnings("unchecked")
-			List<String> elencoCF = (List<String>) unsorted.getNCharacterStream("ELENCOCF");
-			LocalDate giorno = (LocalDate) unsorted.getObject("DATA");
-
-			
-			Intervento intervento = new Intervento(ID_Gestionale,giorno, elencoCF,
-					DescrizioneValutativa,gravità);
-			interventi.add(intervento);
-			flag++;
+			while(unsorted.next()) {
+				int ID_Gestionale = unsorted.getInt("ID_GESTIONALE");
+				String DescrizioneValutativa = unsorted.getString("DESCRIZIONE");
+				int gravità = unsorted.getInt("GRAVITA");
+				@SuppressWarnings("unchecked")
+				List<String> elencoCF = (List<String>) unsorted.getNCharacterStream("ELENCOCF");
+				LocalDate giorno = (LocalDate) unsorted.getObject("DATA");
+		
+				
+				Intervento intervento = new Intervento(ID_Gestionale,giorno, elencoCF,
+						DescrizioneValutativa,gravità);
+				interventi.add(intervento);
+				flag++;
 			}
 		} catch (SQLException e) {
 			AlertPanel.saysError("Errore nell'analisi delle aree verdi selezionate", e);

@@ -56,10 +56,12 @@ public class AggiuntaInterventoController {
 			return false;
 		}
 		
-		/*
-		 * TODO 
-		 * controllo anti SQLInjection descrizioneValutativa 
-		 */
+		//controllo anti SQLInjection		
+		if(intervento.getDescrizioneValutativa().contains("'"))
+		{
+			intervento.getDescrizioneValutativa().replace("'", "`");
+		}
+		
 		
 		if(intervento.getGravità() > 5 || intervento.getGravità() < 1)
 		{

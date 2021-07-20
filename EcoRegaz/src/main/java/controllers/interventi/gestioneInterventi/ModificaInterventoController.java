@@ -49,6 +49,12 @@ public class ModificaInterventoController {
 		 * controllo anti SQLInjection descrizione 
 		 */
 		
+		//controllo anti SQLInjection		
+		if(intervento.getDescrizioneValutativa().contains("'"))
+		{
+			intervento.getDescrizioneValutativa().replace("'", "`");
+		}
+		
 		if(intervento.getGravità() > 5 || intervento.getGravità() < 1)
 		{
 			AlertPanel.saysInfo("ERRORE", "La gravità inserita è scorretta: deve essere compresa tra 1 e 5");
