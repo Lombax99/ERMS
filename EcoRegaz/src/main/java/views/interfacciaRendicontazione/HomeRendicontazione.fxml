@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" stylesheets="@bootstrap3.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" stylesheets="@../../../resources/bootstrap3.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.views.interfacciaRendicontazione.HomeRendicontazione">
    <children>
       <ChoiceBox layoutX="447.0" layoutY="138.0" prefWidth="150.0" />
       <DatePicker layoutX="144.0" layoutY="115.0" prefHeight="26.0" prefWidth="108.0" promptText="inizio" />
@@ -20,7 +20,7 @@
          <graphic>
             <ImageView fitHeight="77.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/immagine_tastoEseguiRendicontazione.png" />
+                  <Image url="@../../../resources/images/immagine_tastoEseguiRendicontazione.png" />
                </image>
             </ImageView>
          </graphic>

@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" stylesheets="@bootstrap3.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" stylesheets="@../../../resources/bootstrap3.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.views.interfacciaStrumenti.HomeStrumenti">
    <children>
       <Button contentDisplay="BOTTOM" graphicTextGap="9.0" layoutX="503.0" layoutY="109.0" mnemonicParsing="false" prefHeight="172.0" prefWidth="166.0" text="SACCHI">
          <graphic>
             <ImageView fitHeight="127.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/icon_sacchi.png" />
+                  <Image url="@../../../resources/images/icon_sacchi.png" />
                </image>
             </ImageView>
          </graphic>
@@ -25,7 +25,7 @@
          <graphic>
             <ImageView fitHeight="128.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/icon_guanti.png" />
+                  <Image url="@../../../resources/images/icon_guanti.png" />
                </image>
             </ImageView>
          </graphic>
@@ -36,7 +36,7 @@
          <graphic>
             <ImageView fitHeight="145.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/icon_pinza.jpg" />
+                  <Image url="@../../../resources/images/icon_pinza.jpg" />
                </image>
             </ImageView>
          </graphic></Button>
