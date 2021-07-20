@@ -1,5 +1,6 @@
 package main.java.views.interfacciaDepositi;
 
+import javafx.stage.Stage;
 import main.java.controllers.strumenti.deposito.*;
 
 public class HomeDepositi {
@@ -17,6 +18,10 @@ public class HomeDepositi {
 		this.elimDepController = elimDepController;
 	}
 	
+	public HomeDepositi(Stage primaryStage) {
+		// TODO Auto-generated constructor stub
+	}
+
 	private void tastoAggiugniDepositoHandler()	{
 		
 	}

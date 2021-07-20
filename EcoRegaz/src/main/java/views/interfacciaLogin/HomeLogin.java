@@ -83,13 +83,16 @@ public class HomeLogin {
 	private void initHomePrincipale() {
 		
 		/*
-		 * Load del homePrincipale con la chiamata al costruttore personalizzata.
+		 * Load del homePrincipale.
+		 * Set del primaryStage.
 		 */
 		AnchorPane homePrincipale = null;
 		try {
 			homePrincipale = FXMLLoader.<AnchorPane>load(getClass().getResource(homePrincipaleURL), null, null, e -> {
-				return new HomePrincipale(primaryStage);
+				return new HomePrincipale();
 			});
+			
+			HomePrincipale.getInstance().setPrimaryStage(primaryStage);
 		} catch (IOException e) {
 			AlertPanel.saysError("ERRORE: nella load di HomePrincipale", e);
 		}
