@@ -31,70 +31,35 @@ public class FiltroInterventi {
 		return dataInizio;
 	}
 
-	public void setDataInizio(LocalDate dataInizio) {
-		if(dataInizio == null)
-		{
-			this.dataInizio = Optional.empty();
-		}
-		else
-		{
-			this.dataInizio = Optional.of(dataInizio);
-		}
-	}
-
 	public Optional<LocalDate> getDataFine() {
 		return dataFine;
-	}
-
-	public void setDataFine(LocalDate dataFine) {
-		if(dataFine == null)
-		{
-			this.dataFine = Optional.empty();
-		}
-		else
-		{
-			this.dataFine = Optional.of(dataFine);
-		}
 	}
 
 	public Optional<Quartiere> getQuartiere() {
 		return quartiere;
 	}
 
-	public void setQuartiere(Quartiere quartiere) {
-		if(quartiere == null)
-		{
-			this.quartiere = Optional.empty();
-		}
-		else
-		{
-			this.quartiere = Optional.of(quartiere);
-		}
-	}
-
 	public Optional<String> getNomeArea() {
 		return nomeArea;
-	}
-
-	public void setNomeArea(String nomeArea) {
-		if(nomeArea.strip().isEmpty() || nomeArea.equals(null))
-		{
-			this.nomeArea = Optional.empty();
-		}
-		else
-		{
-			this.nomeArea = Optional.of(nomeArea);
-		}
 	}
 
 	public Optional<String> getDescrizione() {
 		return descrizione;
 	}
 
-	public void setDescrizione(String descrizione) {
+	
+	/*
+	 * Le seguenti funzioni ritornano:
+	 * un valore vero se l'attributo selezionato una volta modificato contiene qualcosa
+	 * ritorna invece un valore falso se è vuoto 
+	 * errore in alertPanel in caso di errori (ad esempio per una descirzione troppo lunga)
+	 */
+	
+	public boolean setDescrizione(String descrizione) {
 		if(descrizione.strip().isEmpty() || descrizione.equals(null))
 		{
 			this.descrizione = Optional.empty();
+			return false;
 		}
 		else
 		{
@@ -110,6 +75,61 @@ public class FiltroInterventi {
 				throw new IllegalArgumentException();
 			}
 			this.descrizione = Optional.of(descrizione.toUpperCase());
+			return true;
 		}
-	};	
+	}
+	
+
+	public boolean setQuartiere(Quartiere quartiere) {
+		if(quartiere == null)
+		{
+			this.quartiere = Optional.empty();
+			return false;
+		}
+		else
+		{
+			this.quartiere = Optional.of(quartiere);
+			return true;
+		}
+	}
+	
+	public boolean setNomeArea(String nomeArea) {
+		if(nomeArea.strip().isEmpty() || nomeArea.equals(null))
+		{
+			this.nomeArea = Optional.empty();
+			return false;
+		}
+		else
+		{
+			this.nomeArea = Optional.of(nomeArea);
+			return true;
+		}
+	}
+	
+	public boolean setDataInizio(LocalDate dataInizio) {
+		if(dataInizio == null)
+		{
+			this.dataInizio = Optional.empty();
+			return false;
+		}
+		else
+		{
+			this.dataInizio = Optional.of(dataInizio);
+			return true;
+		}
+	}
+
+	public boolean setDataFine(LocalDate dataFine) {
+		if(dataFine == null)
+		{
+			this.dataFine = Optional.empty();
+			return false;
+		}
+		else
+		{
+			this.dataFine = Optional.of(dataFine);
+			return true;
+		}
+	}
+	
 }
