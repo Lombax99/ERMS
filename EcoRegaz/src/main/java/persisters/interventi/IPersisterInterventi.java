@@ -1,7 +1,7 @@
 package main.java.persisters.interventi;
 
 import java.sql.ResultSet;
-import java.time.LocalDate;
+import java.sql.SQLException;
 
 import main.java.controllers.interventi.gestioneInterventi.FiltroInterventi;
 import main.java.models.intervento.Intervento;
@@ -11,12 +11,12 @@ import main.java.models.intervento.Intervento;
  */
 public interface IPersisterInterventi {
 	
-	public ResultSet visualizzaInterventi(FiltroInterventi filtroInterventi);
+	public ResultSet visualizzaInterventi(FiltroInterventi filtroInterventi) throws SQLException;
 	
-	public boolean aggiuntaIntervento(Intervento intervento);
+	public boolean aggiuntaIntervento(Intervento intervento) throws SQLException;
 	
-	public boolean rimuoviIntervento(LocalDate date, String nomeAreaVerde);
+	public boolean rimuoviIntervento(int id_Intervento) throws SQLException;
 	
-	public boolean modificaIntervento(Intervento intervento);
+	public boolean modificaIntervento(Intervento intervento) throws SQLException;
 
 }

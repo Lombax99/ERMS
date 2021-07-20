@@ -1,5 +1,6 @@
 package main.java.persisters.areeVerdi;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import main.java.models.areaVerde.AreaVerde;
@@ -10,8 +11,8 @@ import main.java.models.areaVerde.AreaVerde;
  */
 public interface IPersisterAreeVerdi {
 
-	public List<AreaVerde> visualizzaAreeVerdi(String nomeAreaVerde);
+	public List<AreaVerde> visualizzaAreeVerdi(String nomeAreaVerde) throws SQLException;
 	
-	public boolean aggiuntaAreaVerde(AreaVerde areaVerde);
+	public boolean aggiuntaAreaVerde(AreaVerde areaVerde) throws SQLException;
 
 }
