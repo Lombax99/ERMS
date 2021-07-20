@@ -13,7 +13,7 @@
       <Label layoutX="116.0" layoutY="132.0" text="D001" />
       <Label layoutX="164.0" layoutY="132.0" text="Casa Riccardo" />
       <Button layoutX="444.0" layoutY="125.0" mnemonicParsing="false" text="+" />
-      <Button layoutX="443.0" layoutY="169.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="-" />
+      <Button layoutX="444.0" layoutY="165.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="-" />
       <Label layoutX="304.0" layoutY="132.0" text="4" />
       <TextField layoutX="486.0" layoutY="148.0" prefHeight="26.0" prefWidth="58.0" />
       <Label graphicTextGap="0.0" layoutX="326.0" layoutY="23.0" prefHeight="30.0" prefWidth="68.0" text="Sacchi" textAlignment="CENTER" textFill="#6b9239" wrapText="true">
