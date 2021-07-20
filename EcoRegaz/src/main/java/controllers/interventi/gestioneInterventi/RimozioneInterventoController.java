@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 import main.java.application.AlertPanel;
-import main.java.persisters.interventiAreeVerdi.PersisterInterventiAreeVerdi;
+import main.java.persisters.interventi.PersisterInterventi;
 
 public class RimozioneInterventoController {
 
@@ -30,7 +30,7 @@ public class RimozioneInterventoController {
 		
 		//evocazione persister normale
 		try {
-			if(PersisterInterventiAreeVerdi.getInstance().rimuoviIntervento(data, nomeAreaVerde))
+			if(PersisterInterventi.getInstance().rimuoviIntervento(data, nomeAreaVerde))
 			{
 				return true;
 			}

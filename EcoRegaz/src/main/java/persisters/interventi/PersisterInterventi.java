@@ -1,4 +1,4 @@
-package main.java.persisters.interventiAreeVerdi;
+package main.java.persisters.interventi;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,13 +7,13 @@ import java.time.LocalDate;
 import main.java.controllers.interventi.gestioneInterventi.FiltroInterventi;
 import main.java.models.intervento.Intervento;
 
-public class PersisterInterventiAreeVerdi implements IPersisterInterventiAreeVerdi{
+public class PersisterInterventi implements IPersisterInterventi{
 	
 	
 	/*
 	 * Pattern Singleton
 	 */
-	private static PersisterInterventiAreeVerdi instance = null;
+	private static PersisterInterventi instance = null;
 
 	/**
 	 * Pattern Singleton. <br>
@@ -21,9 +21,9 @@ public class PersisterInterventiAreeVerdi implements IPersisterInterventiAreeVer
 	 * 
 	 * @throws SQLException
 	 */
-	public static PersisterInterventiAreeVerdi getInstance() throws SQLException {
+	public static PersisterInterventi getInstance() throws SQLException {
 		if (instance == null) {
-			instance = new PersisterInterventiAreeVerdi();
+			instance = new PersisterInterventi();
 		}
 		return instance;
 	}

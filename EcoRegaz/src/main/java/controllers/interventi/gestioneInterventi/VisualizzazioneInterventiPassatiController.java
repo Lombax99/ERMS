@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import main.java.application.AlertPanel;
-import main.java.persisters.interventiAreeVerdi.PersisterInterventiAreeVerdi;
+import main.java.persisters.interventi.PersisterInterventi;
 
 public class VisualizzazioneInterventiPassatiController {
 	
@@ -14,7 +14,7 @@ public class VisualizzazioneInterventiPassatiController {
 		
 		//evocazione persister
 		try {
-			result = PersisterInterventiAreeVerdi.getInstance().visualizzaInterventi((filtro));
+			result = PersisterInterventi.getInstance().visualizzaInterventi((filtro));
 		} catch (SQLException e) {
 			AlertPanel.saysError("Errore nella visualizzazione DB Interventi Passati", e);
 		}

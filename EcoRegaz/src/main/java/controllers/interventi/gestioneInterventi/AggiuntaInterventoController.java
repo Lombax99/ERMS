@@ -8,7 +8,7 @@ import main.java.application.AlertPanel;
 import main.java.models.areaVerde.AreaVerde;
 import main.java.models.intervento.Intervento;
 import main.java.persisters.areeVerdi.PersisterAreeVerdi;
-import main.java.persisters.interventiAreeVerdi.PersisterInterventiAreeVerdi;
+import main.java.persisters.interventi.PersisterInterventi;
 
 public class AggiuntaInterventoController {
 
@@ -59,7 +59,7 @@ public class AggiuntaInterventoController {
 		
 		//evocazione persister normale
 			try {
-				if(PersisterInterventiAreeVerdi.getInstance().aggiuntaIntervento(intervento))
+				if(PersisterInterventi.getInstance().aggiuntaIntervento(intervento))
 				{
 					return true;
 				}

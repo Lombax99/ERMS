@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import main.java.application.AlertPanel;
 import main.java.models.intervento.Intervento;
-import main.java.persisters.interventiAreeVerdi.PersisterInterventiAreeVerdi;
+import main.java.persisters.interventi.PersisterInterventi;
 
 public class ModificaInterventoController {
 
@@ -57,7 +57,7 @@ public class ModificaInterventoController {
 		
 		//evocazione persister normale
 			try {
-				if(PersisterInterventiAreeVerdi.getInstance().modificaIntervento(intervento))
+				if(PersisterInterventi.getInstance().modificaIntervento(intervento))
 				{
 					return true;
 				}

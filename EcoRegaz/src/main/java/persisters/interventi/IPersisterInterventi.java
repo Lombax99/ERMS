@@ -1,16 +1,15 @@
-package main.java.persisters.interventiAreeVerdi;
+package main.java.persisters.interventi;
 
 import java.sql.ResultSet;
 import java.time.LocalDate;
 
 import main.java.controllers.interventi.gestioneInterventi.FiltroInterventi;
-import main.java.models.areaVerde.AreaVerde;
 import main.java.models.intervento.Intervento;
 
 /**
  * Interfaccia che definisce i metodi per l'interazione col DB circa interventi e aree verdi
  */
-public interface IPersisterInterventiAreeVerdi {
+public interface IPersisterInterventi {
 	
 	public ResultSet visualizzaInterventi(FiltroInterventi filtroInterventi);
 	
