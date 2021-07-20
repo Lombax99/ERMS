@@ -69,7 +69,7 @@ public class FiltroInterventi {
 			 * vedi prepared statement
 			 */
 			
-			if(descrizione.length() > 50)
+			if(descrizione.length() > 2000)
 			{
 				AlertPanel.saysInfo("ERRORE", "Descrizione troppo lunga");
 				throw new IllegalArgumentException();
