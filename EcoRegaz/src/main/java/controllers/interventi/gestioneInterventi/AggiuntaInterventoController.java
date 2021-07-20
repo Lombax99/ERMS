@@ -9,14 +9,13 @@ import main.java.application.AlertPanel;
 import main.java.controllers.gestioneAreeVerdi.AggiuntaAreaVerdeController;
 import main.java.models.areaVerde.AreaVerde;
 import main.java.models.intervento.Intervento;
-import main.java.persisters.areeVerdi.PersisterAreeVerdi;
 import main.java.persisters.interventi.PersisterInterventi;
 
 public class AggiuntaInterventoController {
 	
 	private AggiuntaAreaVerdeController aggAreaVerdeController;
 	
-	public void AggiuntaInterventoController()
+	public AggiuntaInterventoController()
 	{
 		this.aggAreaVerdeController = new AggiuntaAreaVerdeController();
 	}
