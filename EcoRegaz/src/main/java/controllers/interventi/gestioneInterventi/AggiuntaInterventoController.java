@@ -63,6 +63,12 @@ public class AggiuntaInterventoController {
 		}
 		
 		
+		if(intervento.getDescrizioneValutativa().length() > 2000)
+		{
+			AlertPanel.saysInfo("ERRORE", "Descrizione troppo lunga. Max 2000 caratteri");
+			return false;
+		}
+		
 		if(intervento.getGravità() > 5 || intervento.getGravità() < 1)
 		{
 			AlertPanel.saysInfo("ERRORE", "La gravità inserita è scorretta: deve essere compresa tra 1 e 5");

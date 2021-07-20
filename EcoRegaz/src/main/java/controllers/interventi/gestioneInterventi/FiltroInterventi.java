@@ -72,11 +72,10 @@ public class FiltroInterventi {
 		}
 		else
 		{
-			/*
-			 * TODO
-			 * controllo anti SQLInjection
-			 * vedi prepared statement
-			 */
+			if(descrizione.contains("'"))
+			{
+				descrizione.replace("'", "`");
+			}
 			
 			if(descrizione.length() > 2000)
 			{
