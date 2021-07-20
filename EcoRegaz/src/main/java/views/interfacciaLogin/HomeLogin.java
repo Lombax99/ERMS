@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.java.application.AlertPanel;
@@ -43,6 +45,7 @@ public class HomeLogin {
 	 * Se è falsa, appare un AlertPanel e il campo viene liberato. <br>
 	 * Se è vera, viene eseguito il metodo initHomePrincipale(). <br>
 	 * In entrambi i casi, viene scritto un log via logPersister.
+	 * 
 	 * @throws InterruptedException 
 	 */
 	@FXML
@@ -53,6 +56,19 @@ public class HomeLogin {
 			passwordField.clear();
 			AlertPanel.saysInfo("PASSWORD ERRATA", "Riprovare");
 			TimeUnit.SECONDS.sleep(3);
+		}
+	}
+	
+	
+	/**
+	 * Metodo che viene invocato quando viene cliccato il pulsante ENTER.
+	 * 
+	 * @throws InterruptedException
+	 */
+	@FXML
+	void verificaCredenzialeENTER(KeyEvent event) throws InterruptedException {
+		if (event.getCode() == KeyCode.ENTER) {
+			verificaCredenzialeHandler(new ActionEvent());
 		}
 	}
 
