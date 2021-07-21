@@ -13,9 +13,23 @@ public class GestioneScatoleGuantiController implements IGestioneStrumentiContro
 
 	@Override
 	public boolean aggiuntaNuovoStrumento(IStrumento strumento) {
-
+		
+		if(strumento == null)
+		{
+			AlertPanel.saysInfo("ERRORE", "Lo strumento inserito è null");
+			return false;
+		}
+		
+		ScatolaGuanti scatola = (ScatolaGuanti)strumento;
+		
+		if(scatola.getTaglia() == null)
+		{
+			AlertPanel.saysInfo("ERRORE", "La taglia inserita è null");
+			return false;
+		}
+		
 		try {
-			if (PersisterScatoleGuanti.getInstance().aggiuntaNuovaScatola((ScatolaGuanti) strumento))
+			if (PersisterScatoleGuanti.getInstance().aggiuntaNuovaScatola(scatola))
 				return true;
 		} catch (SQLException e) {
 			AlertPanel.saysError("Errore nell'inserimento dello strumento nel database", e);
@@ -25,23 +39,33 @@ public class GestioneScatoleGuantiController implements IGestioneStrumentiContro
 
 	@Override
 	public boolean rimozioneStrumento(int ID_ScatolaGuanti) {
+		
 		try {
 			if (PersisterScatoleGuanti.getInstance().rimozioneScatola(ID_ScatolaGuanti))
 				return true;
 		} catch (SQLException e) {
-			AlertPanel.saysError("Errore nella rimozione dello strumento nel database", e);
+			AlertPanel.saysError("Errore nella rimozione della scatola guanti nel database", e);
 		}
 		return false;
 	}
 
 	@Override
 	public ResultSet elencoStrumenti() {
-		return null;
+		
+		ResultSet result = null;
+		
+		try {
+			result = PersisterScatoleGuanti.getInstance().elencoScatole();
+		} catch (SQLException e) {
+			AlertPanel.saysError("Errore nella visualizzazione delle scatole guanti dal database", e);
+		}
+		
+		return result;
 	}
 
 	@Override
 	public boolean modificaDatiStrumento(IStrumento strumento) {
-		// non deve essere implementata 
+		// non deve essere implementata
 		return false;
 	}
 
