@@ -108,11 +108,10 @@ public class ViewGuanti implements PropertyChangeListener, Initializable {
 
 
 
-		aggiungi.setOnAction(this::tastoAggiungiScatolaGuantiHandler);
-		rimuovi.setOnAction(this::tastoRimuoviScatolaGuantiHandler);
 	}
 
 
+	@FXML
 	private void tastoAggiungiScatolaGuantiHandler(ActionEvent event) {
 		int numScatole = (int) quantitaField.getValue();
 		setID_DepositoSelezionato(getDepSelezionato().getId_Deposito());
@@ -122,6 +121,7 @@ public class ViewGuanti implements PropertyChangeListener, Initializable {
 	}
 
 
+	@FXML
 	private void tastoRimuoviScatolaGuantiHandler(ActionEvent event) {
 		int numScatole = (int) quantitaField.getValue();
 		setID_DepositoSelezionato(getDepSelezionato().getId_Deposito());
