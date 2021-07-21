@@ -26,7 +26,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Button fx:id="exitButton" layoutX="657.0" layoutY="6.0" mnemonicParsing="false">
+      <Button fx:id="exitButton" layoutX="657.0" layoutY="8.0" mnemonicParsing="false">
          <graphic>
             <ImageView fitHeight="32.0" fitWidth="34.0" preserveRatio="true" rotate="180.0">
                <image>
