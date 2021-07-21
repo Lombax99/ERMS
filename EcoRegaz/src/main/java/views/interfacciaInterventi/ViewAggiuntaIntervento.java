@@ -1,6 +1,9 @@
 package main.java.views.interfacciaInterventi;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -17,24 +20,62 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.java.application.AlertPanel;
 import main.java.controllers.gestioneAreeVerdi.VisualizzazioneAreeVerdiController;
+import main.java.controllers.interventi.gestioneIscritti.FiltroIscritti;
+import main.java.controllers.interventi.gestioneIscritti.VisualizzaElencoIscrittoController;
 import main.java.models.areaVerde.AreaVerde;
 import main.java.views.Utility_SidePanel;
 
 public class ViewAggiuntaIntervento implements Initializable {
 
-	VisualizzazioneAreeVerdiController visualizzazioneController;
+	VisualizzazioneAreeVerdiController visualizzazioneAreeVerdiController;
+	VisualizzaElencoIscrittoController visualizzazioneIscrittiController;
 	AreaVerde areaVerdeSelezionata;
+	List<String> listaCV;
 
 
 	@FXML
 	void tastoAggiungiHandler(ActionEvent event) {
+
+		/*
+		 * Controllo: dataPicker
+		 */
+		if (dataPicker.getValue() == null) {
+			AlertPanel.saysInfo("ERRORE", "Data non inserita");
+			return;
+		}
+
+		/*
+		 * Controllo: descrizione
+		 */
+		if (descrizioneArea.getText() == null) {
+			AlertPanel.saysInfo("ERRORE", "Descrizione non inserita");
+			return;
+		}
+
+		/*
+		 * Controllo: descrizione
+		 */
+		if (gravitaSpinner.getValue() == 0) {
+			AlertPanel.saysInfo("ERRORE", "Gravità non inserita");
+			return;
+		}
+
+		/*
+		 * Controllo: descrizione
+		 */
+		if (listaCV.isEmpty()) {
+			AlertPanel.saysInfo("ERRORE", "Nessun operatore selezionato");
+			return;
+		}
 
 	}
 
@@ -45,11 +86,17 @@ public class ViewAggiuntaIntervento implements Initializable {
 		 * Creo un nuovo stage in cui viene visualizzata una listview con la lista delle aree verdi
 		 */
 		Stage selezionaAreaVerdeStage = new Stage();
+		/*
+		 * Opzione che permette di non poter cliccare al di fuori di questo stage
+		 */
+		selezionaAreaVerdeStage.initModality(Modality.APPLICATION_MODAL);
+
+		selezionaAreaVerdeStage.setWidth(500);
 
 		/*
 		 * Popolamento della lista 
 		 */
-		List<AreaVerde> listaAreeVerdi = visualizzazioneController.visualizza(areaVerdeCerca.getText());
+		List<AreaVerde> listaAreeVerdi = visualizzazioneAreeVerdiController.visualizza(areaVerdeCerca.getText());
 		List<String> listaNomi = new ArrayList<>();
 
 		for (AreaVerde areaVerde : listaAreeVerdi) {
@@ -76,11 +123,6 @@ public class ViewAggiuntaIntervento implements Initializable {
 		Scene selezionaAreaVerdeScene = new Scene(listView);
 		selezionaAreaVerdeStage.setScene(selezionaAreaVerdeScene);
 
-		/*
-		 * Opzione che permette di non poter cliccare al di fuori di questo stage
-		 */
-		selezionaAreaVerdeStage.initModality(Modality.APPLICATION_MODAL);
-
 		selezionaAreaVerdeStage.show();
 	}
 
@@ -100,15 +142,45 @@ public class ViewAggiuntaIntervento implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		/*
-		 * Inizializzazione controller per la visualizza
+		 * Inizializzazione controller per la visualizza delle aree verdi
 		 */
-		visualizzazioneController = new VisualizzazioneAreeVerdiController();
+		visualizzazioneAreeVerdiController = new VisualizzazioneAreeVerdiController();
+
+		/*
+		 * Inizializzazione controller per la visualizza degli iscritti
+		 */
+		visualizzazioneIscrittiController = new VisualizzaElencoIscrittoController();
+
+		/*
+		 * Set up del dataPiker
+		 */
+		dataPicker.setValue(LocalDate.now());
+
+		/*
+		 * Set up di gravitaSpinner: va da 1 a 5, e parte da 0
+		 */
+		gravitaSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 5, 0));
+
+
+		/*
+		 * Set up di listaOperatori:
+		 * 1) viene prelevato il ResultSet con tutti gli iscritti
+		 * 2) 
+		 */
+		ResultSet tuttiIscritti = visualizzazioneIscrittiController.visualizza(new FiltroIscritti());
+		try {
+			while (tuttiIscritti.next()) {
+				listaOperatori.getItems().add(tuttiIscritti.getString(2) + tuttiIscritti.getString(3));
+			}
+		} catch (SQLException e) {
+			AlertPanel.saysError("ERRORE nella visualizza degli iscritti", e);
+		}
+
 
 		/*
 		 * Set up del sidePanel
 		 */
 		Utility_SidePanel.initialize(exitButton, sidePanel);
-
 
 	}
 
