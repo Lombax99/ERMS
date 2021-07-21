@@ -40,6 +40,7 @@ public class ViewAggiuntaIntervento implements Initializable {
 	VisualizzaElencoIscrittoController visualizzazioneIscrittiController;
 	AreaVerde areaVerdeSelezionata;
 	List<String> listaCV;
+	ResultSet tuttiIscritti;
 
 
 	@FXML
@@ -69,8 +70,22 @@ public class ViewAggiuntaIntervento implements Initializable {
 			return;
 		}
 
+
+
 		/*
-		 * Controllo: descrizione
+		 * Inserimento degli iscritti delezionati
+		 */
+		for (Integer indexSelected : listaOperatori.getSelectionModel().getSelectedIndices()) {
+			try {
+				tuttiIscritti.absolute(indexSelected);
+				listaCV.add(tuttiIscritti.getString(1));
+			} catch (SQLException e) {
+				AlertPanel.saysError("ERRORE nel salvataggio degli iscritti selezionati", e);
+			}
+		}
+
+		/*
+		 * Controllo: lista Operatori
 		 */
 		if (listaCV.isEmpty()) {
 			AlertPanel.saysInfo("ERRORE", "Nessun operatore selezionato");
@@ -167,7 +182,7 @@ public class ViewAggiuntaIntervento implements Initializable {
 		 * 1) viene prelevato il ResultSet con tutti gli iscritti
 		 * 2) 
 		 */
-		ResultSet tuttiIscritti = visualizzazioneIscrittiController.visualizza(new FiltroIscritti());
+		tuttiIscritti = visualizzazioneIscrittiController.visualizza(new FiltroIscritti());
 		try {
 			while (tuttiIscritti.next()) {
 				listaOperatori.getItems().add(tuttiIscritti.getString(2) + tuttiIscritti.getString(3));
