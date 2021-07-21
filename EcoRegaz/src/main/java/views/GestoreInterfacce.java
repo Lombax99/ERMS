@@ -14,6 +14,8 @@ import main.java.views.interfacciaAnalisi.HomeAnalisi;
 import main.java.views.interfacciaDepositi.HomeDepositi;
 import main.java.views.interfacciaHome.HomePrincipale;
 import main.java.views.interfacciaInterventi.HomeInterventi;
+import main.java.views.interfacciaInterventi.ViewAggiuntaIntervento;
+import main.java.views.interfacciaInterventi.ViewVisualizzazioneInterventiPassati;
 import main.java.views.interfacciaIscritti.HomeIscritti;
 import main.java.views.interfacciaLogin.HomeLogin;
 import main.java.views.interfacciaRendicontazione.HomeRendicontazione;
@@ -58,6 +60,8 @@ public class GestoreInterfacce {
 	public final static String homeIscrittiURL = "/main/java/views/interfacciaIscritti/HomeIscritti.fxml";
 	public final static String homeRendicontazioneURL = "/main/java/views/interfacciaRendicontazione/HomeRendicontazione.fxml";
 	public final static String homeStrumentiURL = "/main/java/views/interfacciaStrumenti/HomeStrumenti.fxml";
+	public final static String viewAggiuntaInterventoURL = "/main/java/views/interfacciaInterventi/ViewAggiuntaIntervento.fxml";
+	public final static String viewVisualizzazioneInterventiPassatiURL = "/main/java/views/interfacciaInterventi/ViewVisualizzazioneInterventiPassati.fxml";
 
 	/*
 	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -221,7 +225,7 @@ public class GestoreInterfacce {
 			}
 
 			/*
-			 * Creazione della Scene di homeInterventi e inserimento del CSS
+			 * Creazione della Scene di homeInterventi
 			 */
 			homeInterventiScene = new Scene(homeInterventi);
 
@@ -231,6 +235,99 @@ public class GestoreInterfacce {
 		 * Set della homeInterventiScene nel primaryStage
 		 */
 		primaryStage.setScene(homeInterventiScene);
+	}
+
+
+	/*
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * INIZIALIZZAZIONE VIEW AGGIUNTA INTERVENTO
+	 */
+
+
+	/**
+	 * Variabile globale
+	 */
+	Scene viewAggiuntaInterventoScene;
+
+
+	/**
+	 * Alla prima chiamata della funzione, la scena è null. <br>
+	 * Alle successive chiamate, viene usata la stessa istanza.
+	 */
+	public void initViewAggiuntaIntervento() {
+		if (viewAggiuntaInterventoScene == null) {
+
+			/*
+			 * Load di viewAggiuntaIntervento con la chiamata al costruttore personalizzata.
+			 */
+			AnchorPane viewAggiuntaIntervento = null;
+			try {
+				viewAggiuntaIntervento = FXMLLoader.<AnchorPane>load(getClass().getResource(viewAggiuntaInterventoURL), null, null, e -> {
+					return new ViewAggiuntaIntervento();
+				});
+			} catch (IOException e) {
+				AlertPanel.saysError("ERRORE: nella load di ViewAggiuntaIntervento", e);
+			}
+
+			/*
+			 * Creazione della Scene di viewAggiuntaIntervento
+			 */
+			viewAggiuntaInterventoScene = new Scene(viewAggiuntaIntervento);
+
+		}
+
+		/*
+		 * Set della viewAggiuntaInterventoScene nel primaryStage
+		 */
+		primaryStage.setScene(viewAggiuntaInterventoScene);
+	}
+
+
+
+	/*
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * INIZIALIZZAZIONE VIEW VEDI INTERVENTI PASSATI
+	 */
+
+
+	/**
+	 * Variabile globale
+	 */
+	Scene viewVediInterventiScene;
+
+
+	/**
+	 * Alla prima chiamata della funzione, la scena è null. <br>
+	 * Alle successive chiamate, viene usata la stessa istanza.
+	 */
+	public void initViewVediInterventi() {
+		if (viewVediInterventiScene == null) {
+
+			/*
+			 * Load di viewVediInterventi con la chiamata al costruttore personalizzata.
+			 */
+			AnchorPane viewVediInterventi = null;
+			try {
+				viewVediInterventi = FXMLLoader.<AnchorPane>load(getClass().getResource(viewVisualizzazioneInterventiPassatiURL), null, null, e -> {
+					return new ViewVisualizzazioneInterventiPassati();
+				});
+			} catch (IOException e) {
+				AlertPanel.saysError("ERRORE: nella load di ViewVisualizzazioneInterventiPassati", e);
+			}
+
+			/*
+			 * Creazione della Scene di viewVediInterventi
+			 */
+			viewVediInterventiScene = new Scene(viewVediInterventi);
+
+		}
+
+		/*
+		 * Set della viewVediInterventiScene nel primaryStage
+		 */
+		primaryStage.setScene(viewVediInterventiScene);
 	}
 
 
