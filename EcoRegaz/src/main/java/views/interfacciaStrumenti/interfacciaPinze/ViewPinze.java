@@ -1,22 +1,28 @@
 package main.java.views.interfacciaStrumenti.interfacciaPinze;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JFormattedTextField;
 
 import com.jfoenix.controls.JFXDrawer;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import main.java.controllers.strumenti.pinze.FiltroPinze;
 import main.java.controllers.strumenti.pinze.GestionePinzeController;
 import main.java.models.strumenti.pinza.Appartenenza;
 import main.java.models.strumenti.pinza.Condizione;
@@ -31,15 +37,13 @@ public class ViewPinze implements Initializable {
 	/*
 	 * Definizione dei componenti grafici
 	 */
-	@FXML
-	Button AggiungiPinzaButton;
-	@FXML
-	Button PopUpAggiungiPinzaButton;
 
 	@FXML
 	private JFXDrawer sidePanel;
 	@FXML
 	private Button exitButton;
+	@FXML
+	private ListView<String> listViewDepositi;
 
 	@FXML
 	ChoiceBox<Integer> ID_DepositoField;
@@ -72,6 +76,20 @@ public class ViewPinze implements Initializable {
 		popup.setX(300);
 		popup.setY(200);
 		popup.getContent().add(e);
+		
+		
+		/*
+		 * Prelevamento depositi
+		 */
+		GestionePinzeController gp = new GestionePinzeController();
+		ResultSet result = gp.elencoStrumenti(new FiltroPinze());
+		
+		List<String> listaDepositi = new ArrayList<>();
+		while(result.next()) {
+			listaDepositi.add(result.getString(4));
+		}
+		
+		listViewDepositi.setItems(FXCollections.observableArrayList(listaDepositi));
 	}
 
 
