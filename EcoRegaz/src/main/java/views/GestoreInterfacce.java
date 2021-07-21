@@ -20,6 +20,9 @@ import main.java.views.interfacciaIscritti.HomeIscritti;
 import main.java.views.interfacciaLogin.HomeLogin;
 import main.java.views.interfacciaRendicontazione.HomeRendicontazione;
 import main.java.views.interfacciaStrumenti.HomeStrumenti;
+import main.java.views.interfacciaStrumenti.interfacciaGuanti.ViewGuanti;
+import main.java.views.interfacciaStrumenti.interfacciaPinze.ViewPinze;
+import main.java.views.interfacciaStrumenti.interfacciaSacchi.ViewSacchi;
 
 public class GestoreInterfacce {
 
@@ -62,6 +65,10 @@ public class GestoreInterfacce {
 	public final static String homeStrumentiURL = "/main/java/views/interfacciaStrumenti/HomeStrumenti.fxml";
 	public final static String viewAggiuntaInterventoURL = "/main/java/views/interfacciaInterventi/ViewAggiuntaIntervento.fxml";
 	public final static String viewVisualizzazioneInterventiPassatiURL = "/main/java/views/interfacciaInterventi/ViewVisualizzazioneInterventiPassati.fxml";
+	public final static String viewGuantiURL = "/main/java/views/interfacciaStrumenti/interfacciaGuanti/ViewGuanti.fxml";
+	public final static String viewPinzeURL = "/main/java/views/interfacciaStrumenti/interfacciaPinze/ViewPinze.fxml";
+	public final static String viewSacchiURL = "/main/java/views/interfacciaStrumenti/interfacciaSacchi/ViewSacchi.fxml";
+	
 
 	/*
 	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -468,6 +475,143 @@ public class GestoreInterfacce {
 		 * Set della homeStrumentiScene nel primaryStage
 		 */
 		primaryStage.setScene(homeStrumentiScene);
+
+	}
+	
+	/*
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * INIZIALIZZAZIONE VIEW GUANTI
+	 */
+	/**
+	 * Variabile globale
+	 */
+	Scene viewGuantiScene;
+
+
+	/**
+	 * Alla prima chiamata della funzione, la scena è null. <br>
+	 * Alle successive chiamate, viene usata la stessa istanza.
+	 */
+	public void initViewGuanti() {
+
+		if (viewGuantiScene == null) {
+
+			/*
+			 * Load di viewGuanti con la chiamata al costruttore personalizzata.
+			 */
+			AnchorPane viewGuanti = null;
+			try {
+				viewGuanti = FXMLLoader.<AnchorPane>load(getClass().getResource(viewGuantiURL), null, null, e -> {
+					return new ViewGuanti();
+				});
+			} catch (IOException e) {
+				AlertPanel.saysError("ERRORE: nella load di ViewGuanti", e);
+			}
+
+			/*
+			 * Creazione della Scene di viewGuanti e inserimento del CSS
+			 */
+			viewGuantiScene = new Scene(viewGuanti);
+
+		}
+
+		/*
+		 * Set della viewGuantiScene nel primaryStage
+		 */
+		primaryStage.setScene(viewGuantiScene);
+
+	}
+	
+	
+	/*
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * INIZIALIZZAZIONE VIEW PINZE
+	 */
+	/**
+	 * Variabile globale
+	 */
+	Scene viewPinzeScene;
+
+
+	/**
+	 * Alla prima chiamata della funzione, la scena è null. <br>
+	 * Alle successive chiamate, viene usata la stessa istanza.
+	 */
+	public void initViewPinze() {
+
+		if (viewPinzeScene == null) {
+
+			/*
+			 * Load di viewPinze con la chiamata al costruttore personalizzata.
+			 */
+			AnchorPane viewPinze = null;
+			try {
+				viewPinze = FXMLLoader.<AnchorPane>load(getClass().getResource(viewPinzeURL), null, null, e -> {
+					return new ViewPinze();
+				});
+			} catch (IOException e) {
+				AlertPanel.saysError("ERRORE: nella load di ViewPinze", e);
+			}
+
+			/*
+			 * Creazione della Scene di viewPinze e inserimento del CSS
+			 */
+			viewPinzeScene = new Scene(viewPinze);
+
+		}
+
+		/*
+		 * Set della viewPinzeScene nel primaryStage
+		 */
+		primaryStage.setScene(viewPinzeScene);
+
+	}
+	
+	
+	/*
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * INIZIALIZZAZIONE VIEW GUANTI
+	 */
+	/**
+	 * Variabile globale
+	 */
+	Scene viewSacchiScene;
+
+
+	/**
+	 * Alla prima chiamata della funzione, la scena è null. <br>
+	 * Alle successive chiamate, viene usata la stessa istanza.
+	 */
+	public void initViewSacchi() {
+
+		if (viewSacchiScene == null) {
+
+			/*
+			 * Load di viewSacchi con la chiamata al costruttore personalizzata.
+			 */
+			AnchorPane viewSacchi = null;
+			try {
+				viewSacchi = FXMLLoader.<AnchorPane>load(getClass().getResource(viewSacchiURL), null, null, e -> {
+					return new ViewSacchi();
+				});
+			} catch (IOException e) {
+				AlertPanel.saysError("ERRORE: nella load di ViewSacchi", e);
+			}
+
+			/*
+			 * Creazione della Scene di viewSacchi e inserimento del CSS
+			 */
+			viewSacchiScene = new Scene(viewSacchi);
+
+		}
+
+		/*
+		 * Set della viewSacchiScene nel primaryStage
+		 */
+		primaryStage.setScene(viewSacchiScene);
 
 	}
 
