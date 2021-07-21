@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" stylesheets="@../../../resources/bootstrap3.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.views.interfacciaInterventi.HomeInterventi">
    <children>
-      <Button contentDisplay="BOTTOM" graphicTextGap="9.0" layoutX="124.0" layoutY="173.0" mnemonicParsing="false" prefHeight="136.0" prefWidth="158.0" text="AGGIUNGI">
+      <Button contentDisplay="BOTTOM" graphicTextGap="9.0" layoutX="124.0" layoutY="173.0" mnemonicParsing="false" onAction="#openAggiungiInterventoHandler" prefHeight="136.0" prefWidth="158.0" text="AGGIUNGI">
          <graphic>
             <ImageView fitHeight="97.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -23,7 +23,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Button contentDisplay="BOTTOM" graphicTextGap="9.0" layoutX="459.0" layoutY="171.0" mnemonicParsing="false" prefHeight="136.0" prefWidth="158.0" text="VEDI PASSATI">
+      <Button contentDisplay="BOTTOM" graphicTextGap="9.0" layoutX="459.0" layoutY="171.0" mnemonicParsing="false" onAction="#openVediInterventiHandler" prefHeight="136.0" prefWidth="158.0" text="VEDI PASSATI">
          <graphic>
             <ImageView fitHeight="97.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
                <image>
