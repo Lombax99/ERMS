@@ -13,7 +13,6 @@ public class Main extends Application {
 	 */
 	public final static String VERSION = "1.0.0.0";
 
-
 	public final static Integer MIN_WIDTH = 720;
 	public final static Integer MIN_HIGHT = 480;
 
@@ -21,13 +20,14 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		/*
-		 * Impostazioni dello stage primario (primaryStage).
-		 * Tale stage appare al centro dello schermo, non massimizzato e con dimensione massima pari alla dimensione massima dello schermo dell'user.
+		 * Impostazioni dello stage primario (primaryStage). Tale stage appare al centro
+		 * dello schermo, non massimizzato e con dimensione massima pari alla dimensione
+		 * massima dello schermo dell'user.
 		 */
 		primaryStage.setTitle("ERMS");
 
-			// TODO: aggiungere l'icona del programma
-			// primaryStage.getIcons().add(new Image("path"));
+		// TODO: aggiungere l'icona del programma
+		// primaryStage.getIcons().add(new Image("path"));
 
 		primaryStage.setMinWidth(MIN_WIDTH);
 		primaryStage.setMinHeight(MIN_HIGHT);
@@ -36,19 +36,17 @@ public class Main extends Application {
 		primaryStage.setMaximized(false);
 
 		primaryStage.centerOnScreen();
-		
 
 		/*
 		 * Passaggio del primaryStage al GestoreInterfacce
 		 */
 		GestoreInterfacce.getInstance().setPrimaryStage(primaryStage);
-		
+
 		/*
 		 * Chiedo al GestoreInterfacce di visualizzare la HomeLogin
 		 */
 		GestoreInterfacce.getInstance().initHomeLogin();
-		
-		
+
 		primaryStage.show();
 
 	}
