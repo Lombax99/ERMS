@@ -64,6 +64,11 @@ public class ViewGuanti implements PropertyChangeListener {
 
 	public  ViewGuanti() {
 		
+		//inizializzazione	
+		visualizza(); // aka initPane
+	}
+	
+	private void visualizza() {
 		ObservableList<ResultSet> depositi = FXCollections.observableArrayList(
 		         depositoControllerReference.elencoDepositi());
 		 ListView<Deposito> depositoDaSelezionare = new ListView<Deposito>();
@@ -90,11 +95,7 @@ public class ViewGuanti implements PropertyChangeListener {
 		aggiungi.setOnAction(this::tastoAggiungiScatolaGuantiHandler);
 		
 		Button rimuovi = new Button("-");
-		rimuovi.setOnAction(this::tastoRimuoviScatolaGuantiHandler);		
-	}
-	
-	private void visualizza() {
-		
+		rimuovi.setOnAction(this::tastoRimuoviScatolaGuantiHandler);
 	}
 	
 	private void tastoAggiungiScatolaGuantiHandler(ActionEvent event) {
