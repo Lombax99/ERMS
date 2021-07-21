@@ -16,14 +16,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import main.java.controllers.gestioneAreeVerdi.VisualizzazioneAreeVerdiController;
 import main.java.models.areaVerde.AreaVerde;
 import main.java.views.Utility_SidePanel;
@@ -31,7 +30,7 @@ import main.java.views.Utility_SidePanel;
 public class ViewAggiuntaIntervento implements Initializable {
 
 	VisualizzazioneAreeVerdiController visualizzazioneController;
-	String areaVerdeSelezionata;
+	AreaVerde areaVerdeSelezionata;
 
 
 	@FXML
@@ -42,13 +41,14 @@ public class ViewAggiuntaIntervento implements Initializable {
 
 	@FXML
 	void tastoCerceAreaVerdeHandler(ActionEvent event) {
-		
+		/*
+		 * Creo un nuovo stage in cui viene visualizzata una listview con la lista delle aree verdi
+		 */
 		Stage selezionaAreaVerdeStage = new Stage();
 
-		// creo uno scrollPane con dentro una vBox
-		ScrollPane pane = new ScrollPane();
-		pane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-
+		/*
+		 * Popolamento della lista 
+		 */
 		List<AreaVerde> listaAreeVerdi = visualizzazioneController.visualizza(areaVerdeCerca.getText());
 		List<String> listaNomi = new ArrayList<>();
 
@@ -58,17 +58,41 @@ public class ViewAggiuntaIntervento implements Initializable {
 
 		ListView<String> listView = new ListView<>(FXCollections.observableArrayList(listaNomi));
 
+		/*
+		 * Lo stage si chiude quando viene cliccato un elemento della listview.
+		 * Inoltre vengono riempiti i field nella ViewAggiuntaIntervento.
+		 */
 		listView.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String old_val, String new_val) -> {
-			areaVerdeSelezionata = listView.getSelectionModel().getSelectedItem();
+
 			selezionaAreaVerdeStage.close();
+
+			int indexSelezionato = listView.getSelectionModel().getSelectedIndex();
+			areaVerdeSelezionata = listaAreeVerdi.get(indexSelezionato);
+
+			nomeField.setText(areaVerdeSelezionata.getNome());
+			quartiereField.setText(areaVerdeSelezionata.getQuartiere().toString());
 		});
 
 		Scene selezionaAreaVerdeScene = new Scene(listView);
 		selezionaAreaVerdeStage.setScene(selezionaAreaVerdeScene);
+
+		/*
+		 * Opzione che permette di non poter cliccare al di fuori di questo stage
+		 */
 		selezionaAreaVerdeStage.initModality(Modality.APPLICATION_MODAL);
 
 		selezionaAreaVerdeStage.show();
+	}
 
+
+	/**
+	 * Metodo che viene invocato quando viene cliccato il tasto ENTER mentre si digita l'area verde.
+	 */
+	@FXML
+	void cercaAreaVerdeENTER(KeyEvent event) throws InterruptedException {
+		if (event.getCode() == KeyCode.ENTER) {
+			tastoCerceAreaVerdeHandler(new ActionEvent());
+		}
 	}
 
 
