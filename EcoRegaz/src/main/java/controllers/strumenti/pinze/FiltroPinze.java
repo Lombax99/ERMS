@@ -3,13 +3,14 @@ package main.java.controllers.strumenti.pinze;
 import java.util.Optional;
 
 import main.java.application.AlertPanel;
+import main.java.controllers.IFiltro;
 import main.java.models.strumenti.pinza.Appartenenza;
 import main.java.models.strumenti.pinza.Condizione;
 
 /**
  * Classe di utility che va usata quando bisogna ricercare le Pinze con certi parametri. <br>
  */
-public class FiltroPinze {
+public class FiltroPinze implements IFiltro{
 
 	private Optional<Integer> id_Deposito;
 	private Optional<Integer> id_Pinza;

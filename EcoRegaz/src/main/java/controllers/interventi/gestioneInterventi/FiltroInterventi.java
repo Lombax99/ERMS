@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import main.java.application.AlertPanel;
+import main.java.controllers.IFiltro;
 import main.java.models.areaVerde.Quartiere;
 
 /**
@@ -15,7 +16,7 @@ import main.java.models.areaVerde.Quartiere;
  * 4) descrizione: viene ricercata un'area verde che contiene la stringa data nella descrizione
  */
 
-public class FiltroInterventi {
+public class FiltroInterventi implements IFiltro{
 
 	private Optional<LocalDate> dataInizio;
 	private Optional<LocalDate> dataFine;

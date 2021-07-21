@@ -3,6 +3,7 @@ package main.java.controllers.interventi.gestioneIscritti;
 import java.util.Optional;
 
 import main.java.application.AlertPanel;
+import main.java.controllers.IFiltro;
 
 /**
  * Classe di utility che va usata quando bisogna ricercare gli Iscritti con certi parametri. <br>
@@ -11,7 +12,7 @@ import main.java.application.AlertPanel;
  * 2) cognome: uguale a nome <br>
  * 3) codFisc: cercato univocamente: se codFisc="VNGRCR00A26A944A", corrisponde esattamente quello
  */
-public class FiltroIscritti {
+public class FiltroIscritti implements IFiltro{
 	
 	private Optional<String> nome;
 	private Optional<String> cognome;

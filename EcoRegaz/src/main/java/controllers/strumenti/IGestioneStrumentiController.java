@@ -1,6 +1,8 @@
 package main.java.controllers.strumenti;
 
 import java.sql.ResultSet;
+
+import main.java.controllers.IFiltro;
 import main.java.models.strumenti.*;
 
 /**
@@ -14,7 +16,7 @@ public interface IGestioneStrumentiController {
 	
 	public boolean rimozioneStrumento(int ID);
 	
-	public ResultSet elencoStrumenti();
+	public ResultSet elencoStrumenti(IFiltro filtro);
 	
 	public boolean modificaDatiStrumento(IStrumento strumento);
 	

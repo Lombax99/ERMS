@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import main.java.application.AlertPanel;
+import main.java.controllers.IFiltro;
 import main.java.controllers.strumenti.IGestioneStrumentiController;
 import main.java.models.strumenti.IStrumento;
 import main.java.models.strumenti.scatolaGuanti.ScatolaGuanti;
@@ -50,7 +51,7 @@ public class GestioneScatoleGuantiController implements IGestioneStrumentiContro
 	}
 
 	@Override
-	public ResultSet elencoStrumenti() {
+	public ResultSet elencoStrumenti(IFiltro filtro) {
 		
 		ResultSet result = null;
 		
