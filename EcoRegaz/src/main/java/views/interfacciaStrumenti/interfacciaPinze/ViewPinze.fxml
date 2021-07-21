@@ -17,7 +17,7 @@
             <TableColumn prefWidth="199.20001220703125" text="Deposito" />
         </columns>
       </TableView>
-      <Button layoutX="549.0" layoutY="49.0" mnemonicParsing="false" text="AGGIUNGI PINZA" />
+      <Button fx:id="AggiungiPinzaButton" layoutX="549.0" layoutY="49.0" mnemonicParsing="false" onAction="#AggiungiPinzaHandler" text="AGGIUNGI PINZA" />
       <Label graphicTextGap="0.0" layoutX="336.0" layoutY="17.0" prefHeight="39.0" prefWidth="58.0" text="Pinze" textAlignment="CENTER" textFill="#6b9239" wrapText="true">
          <font>
             <Font name="System Bold" size="21.0" />
