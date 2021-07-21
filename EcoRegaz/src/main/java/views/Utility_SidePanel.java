@@ -37,6 +37,8 @@ public class Utility_SidePanel {
 
 		listViewSidePanel.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String old_val, String new_val) -> {
 			String selectedItem = listViewSidePanel.getSelectionModel().getSelectedItem();
+			
+			sidePanel.close();
 
 			switch (selectedItem) {
 			case "Home":
