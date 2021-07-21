@@ -14,6 +14,8 @@ import main.java.views.interfacciaAnalisi.HomeAnalisi;
 import main.java.views.interfacciaDepositi.HomeDepositi;
 import main.java.views.interfacciaHome.HomePrincipale;
 import main.java.views.interfacciaInterventi.HomeInterventi;
+import main.java.views.interfacciaInterventi.ViewAggiuntaIntervento;
+import main.java.views.interfacciaInterventi.ViewVisualizzazioneInterventiPassati;
 import main.java.views.interfacciaIscritti.HomeIscritti;
 import main.java.views.interfacciaLogin.HomeLogin;
 import main.java.views.interfacciaRendicontazione.HomeRendicontazione;
@@ -58,6 +60,8 @@ public class GestoreInterfacce {
 	public final static String homeIscrittiURL = "/main/java/views/interfacciaIscritti/HomeIscritti.fxml";
 	public final static String homeRendicontazioneURL = "/main/java/views/interfacciaRendicontazione/HomeRendicontazione.fxml";
 	public final static String homeStrumentiURL = "/main/java/views/interfacciaStrumenti/HomeStrumenti.fxml";
+	public final static String viewAggiuntaInterventoURL = "/main/java/views/interfacciaInterventi/ViewAggiuntaIntervento.fxml";
+	public final static String viewVisualizzazioneInterventiPassatiURL = "/main/java/views/interfacciaInterventi/ViewVisualizzazioneInterventiPassati.fxml";
 
 	/*
 	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -106,6 +110,15 @@ public class GestoreInterfacce {
 
 
 	/**
+	 * Variabile globale
+	 */
+	Scene homePrincipaleScene;
+
+
+	/**
+	 * Alla prima chiamata della funzione, la scena è null. <br>
+	 * Alle successive chiamate, viene usata la stessa istanza.<br>
+	 *
 	 * 1) Load di HomePrincipale <br>
 	 * 2) Creazione della Scene di HomePrincipale <br>
 	 * 3) Set della Scene nel primaryStage <br>
@@ -115,62 +128,66 @@ public class GestoreInterfacce {
 	 */
 	public void initHomePrincipale() {
 
-		/*
-		 * Load del homePrincipale.
-		 */
-		AnchorPane homePrincipale = null;
-		try {
-			homePrincipale = FXMLLoader.<AnchorPane>load(getClass().getResource(homePrincipaleURL), null, null, e -> {
-				return new HomePrincipale();
+		if (homePrincipaleScene == null) {
+
+			/*
+			 * Load del homePrincipale.
+			 */
+			AnchorPane homePrincipale = null;
+			try {
+				homePrincipale = FXMLLoader.<AnchorPane>load(getClass().getResource(homePrincipaleURL), null, null, e -> {
+					return new HomePrincipale();
+				});
+
+			} catch (IOException e) {
+				AlertPanel.saysError("ERRORE: nella load di HomePrincipale", e);
+			}
+
+			/*
+			 * Creazione della Scene di homePrincipale
+			 */
+			homePrincipaleScene = new Scene(homePrincipale);
+			// homePrincipaleScene.getStylesheets().add(getClass().getResource(CSSbootstrap3URL).toExternalForm()); TODO rimuovere?
+
+
+			/*
+			 * Inizializzazione DB
+			 */
+			try {
+				MainDB.openDatabase();
+			} catch (Exception e) {
+				AlertPanel.saysError("ERRORE: nell'apertura della connessione col database", e);
+			}
+
+			/*
+			 * Impostazioni DB alla chiusura del primaryStage
+			 */
+			primaryStage.setOnCloseRequest(event -> {
+
+				/*
+				 * Avvio Backup
+				 */
+				try {
+					BackupController.getInstance().avviaBackup();
+				} catch (SQLException e) {
+					AlertPanel.saysError("ERRORE: in fase di backup del database", e);
+				}
+
+				/*
+				 * Chiusura database
+				 */
+				try {
+					MainDB.closeDatabase();
+				} catch (SQLException e) {
+					AlertPanel.saysError("ERRORE: in chiusura del database", e);
+				}
 			});
-
-		} catch (IOException e) {
-			AlertPanel.saysError("ERRORE: nella load di HomePrincipale", e);
 		}
-
-		/*
-		 * Creazione della Scene di homePrincipale
-		 */
-		Scene homePrincipaleScene = new Scene(homePrincipale);
-		// homePrincipaleScene.getStylesheets().add(getClass().getResource(CSSbootstrap3URL).toExternalForm()); TODO rimuovere?
 
 		/*
 		 * Set della homePrincipaleScene nel primaryStage
 		 */
 		primaryStage.setScene(homePrincipaleScene);
-
-		/*
-		 * Inizializzazione DB
-		 */
-		try {
-			MainDB.openDatabase();
-		} catch (Exception e) {
-			AlertPanel.saysError("ERRORE: nell'apertura della connessione col database", e);
-		}
-
-		/*
-		 * Impostazioni DB alla chiusura del primaryStage
-		 */
-		primaryStage.setOnCloseRequest(event -> {
-
-			/*
-			 * Avvio Backup
-			 */
-			try {
-				BackupController.getInstance().avviaBackup();
-			} catch (SQLException e) {
-				AlertPanel.saysError("ERRORE: in fase di backup del database", e);
-			}
-
-			/*
-			 * Chiusura database
-			 */
-			try {
-				MainDB.closeDatabase();
-			} catch (SQLException e) {
-				AlertPanel.saysError("ERRORE: in chiusura del database", e);
-			}
-		});
 	}
 
 
@@ -208,7 +225,7 @@ public class GestoreInterfacce {
 			}
 
 			/*
-			 * Creazione della Scene di homeInterventi e inserimento del CSS
+			 * Creazione della Scene di homeInterventi
 			 */
 			homeInterventiScene = new Scene(homeInterventi);
 
@@ -224,20 +241,115 @@ public class GestoreInterfacce {
 	/*
 	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * INIZIALIZZAZIONE VIEW AGGIUNTA INTERVENTO
+	 */
+
+
+	/**
+	 * Variabile globale
+	 */
+	Scene viewAggiuntaInterventoScene;
+
+
+	/**
+	 * Alla prima chiamata della funzione, la scena è null. <br>
+	 * Alle successive chiamate, viene usata la stessa istanza.
+	 */
+	public void initViewAggiuntaIntervento() {
+		if (viewAggiuntaInterventoScene == null) {
+
+			/*
+			 * Load di viewAggiuntaIntervento con la chiamata al costruttore personalizzata.
+			 */
+			AnchorPane viewAggiuntaIntervento = null;
+			try {
+				viewAggiuntaIntervento = FXMLLoader.<AnchorPane>load(getClass().getResource(viewAggiuntaInterventoURL), null, null, e -> {
+					return new ViewAggiuntaIntervento();
+				});
+			} catch (IOException e) {
+				AlertPanel.saysError("ERRORE: nella load di ViewAggiuntaIntervento", e);
+			}
+
+			/*
+			 * Creazione della Scene di viewAggiuntaIntervento
+			 */
+			viewAggiuntaInterventoScene = new Scene(viewAggiuntaIntervento);
+
+		}
+
+		/*
+		 * Set della viewAggiuntaInterventoScene nel primaryStage
+		 */
+		primaryStage.setScene(viewAggiuntaInterventoScene);
+	}
+
+
+
+	/*
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * INIZIALIZZAZIONE VIEW VEDI INTERVENTI PASSATI
+	 */
+
+
+	/**
+	 * Variabile globale
+	 */
+	Scene viewVediInterventiScene;
+
+
+	/**
+	 * Alla prima chiamata della funzione, la scena è null. <br>
+	 * Alle successive chiamate, viene usata la stessa istanza.
+	 */
+	public void initViewVediInterventi() {
+		if (viewVediInterventiScene == null) {
+
+			/*
+			 * Load di viewVediInterventi con la chiamata al costruttore personalizzata.
+			 */
+			AnchorPane viewVediInterventi = null;
+			try {
+				viewVediInterventi = FXMLLoader.<AnchorPane>load(getClass().getResource(viewVisualizzazioneInterventiPassatiURL), null, null, e -> {
+					return new ViewVisualizzazioneInterventiPassati();
+				});
+			} catch (IOException e) {
+				AlertPanel.saysError("ERRORE: nella load di ViewVisualizzazioneInterventiPassati", e);
+			}
+
+			/*
+			 * Creazione della Scene di viewVediInterventi
+			 */
+			viewVediInterventiScene = new Scene(viewVediInterventi);
+
+		}
+
+		/*
+		 * Set della viewVediInterventiScene nel primaryStage
+		 */
+		primaryStage.setScene(viewVediInterventiScene);
+	}
+
+
+	/*
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	 * INIZIALIZZAZIONE HOME RENDICONTAZIONE
 	 */
+
 
 	/**
 	 * Variabile globale
 	 */
 	Scene homeRendicontazioneScene;
-	
+
+
 	/**
 	 * Alla prima chiamata della funzione, la scena è null. <br>
 	 * Alle successive chiamate, viene usata la stessa istanza.
 	 */
 	public void initHomeRendicontazione() {
-		
+
 		if (homeRendicontazioneScene == null) {
 
 			/*
@@ -263,9 +375,9 @@ public class GestoreInterfacce {
 		 * Set della homeRendicontazioneScene nel primaryStage
 		 */
 		primaryStage.setScene(homeRendicontazioneScene);
-		
+
 	}
-	
+
 
 
 	/*
@@ -277,13 +389,14 @@ public class GestoreInterfacce {
 	 * Variabile globale
 	 */
 	Scene homeAnalisiScene;
-	
+
+
 	/**
 	 * Alla prima chiamata della funzione, la scena è null. <br>
 	 * Alle successive chiamate, viene usata la stessa istanza.
 	 */
 	public void initHomeAnalisi() {
-		
+
 		if (homeAnalisiScene == null) {
 
 			/*
@@ -309,7 +422,7 @@ public class GestoreInterfacce {
 		 * Set della homeAnalisiScene nel primaryStage
 		 */
 		primaryStage.setScene(homeAnalisiScene);
-		
+
 	}
 
 
@@ -322,13 +435,14 @@ public class GestoreInterfacce {
 	 * Variabile globale
 	 */
 	Scene homeStrumentiScene;
-	
+
+
 	/**
 	 * Alla prima chiamata della funzione, la scena è null. <br>
 	 * Alle successive chiamate, viene usata la stessa istanza.
 	 */
 	public void initHomeStrumenti() {
-		
+
 		if (homeStrumentiScene == null) {
 
 			/*
@@ -354,7 +468,7 @@ public class GestoreInterfacce {
 		 * Set della homeStrumentiScene nel primaryStage
 		 */
 		primaryStage.setScene(homeStrumentiScene);
-		
+
 	}
 
 
@@ -368,13 +482,14 @@ public class GestoreInterfacce {
 	 * Variabile globale
 	 */
 	Scene homeDepositiScene;
-	
+
+
 	/**
 	 * Alla prima chiamata della funzione, la scena è null. <br>
 	 * Alle successive chiamate, viene usata la stessa istanza.
 	 */
 	public void initHomeDepositi() {
-		
+
 		if (homeDepositiScene == null) {
 
 			/*
@@ -400,7 +515,7 @@ public class GestoreInterfacce {
 		 * Set della homeDepositiScene nel primaryStage
 		 */
 		primaryStage.setScene(homeDepositiScene);
-		
+
 	}
 
 
@@ -414,13 +529,14 @@ public class GestoreInterfacce {
 	 * Variabile globale
 	 */
 	Scene homeIscrittiScene;
-	
+
+
 	/**
 	 * Alla prima chiamata della funzione, la scena è null. <br>
 	 * Alle successive chiamate, viene usata la stessa istanza.
 	 */
 	public void initHomeIscritti() {
-		
+
 		if (homeIscrittiScene == null) {
 
 			/*
@@ -446,7 +562,7 @@ public class GestoreInterfacce {
 		 * Set della homeIscrittiScene nel primaryStage
 		 */
 		primaryStage.setScene(homeIscrittiScene);
-		
+
 	}
 
 
