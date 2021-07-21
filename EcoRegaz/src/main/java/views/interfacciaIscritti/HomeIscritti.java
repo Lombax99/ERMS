@@ -1,10 +1,8 @@
 package main.java.views.interfacciaIscritti;
 
-import javafx.stage.Stage;
-
 public class HomeIscritti {
 
-	public HomeIscritti(Stage primaryStage) {
+	public HomeIscritti() {
 		// TODO Auto-generated constructor stub
 	}
 

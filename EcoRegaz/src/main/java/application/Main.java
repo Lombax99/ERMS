@@ -1,14 +1,10 @@
 package main.java.application;
 
 import java.awt.Toolkit;
-import java.io.IOException;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import main.java.views.interfacciaLogin.HomeLogin;
+import main.java.views.GestoreInterfacce;
 
 public class Main extends Application {
 
@@ -17,9 +13,6 @@ public class Main extends Application {
 	 */
 	public final static String VERSION = "1.0.0.0";
 
-	public final static String homeLoginURL = "/main/java/views/interfacciaLogin/HomeLogin.fxml";
-
-	public final static String CSSbootstrap3URL = "/main/resources/bootstrap3.css";
 
 	public final static Integer MIN_WIDTH = 720;
 	public final static Integer MIN_HIGHT = 480;
@@ -43,32 +36,19 @@ public class Main extends Application {
 		primaryStage.setMaximized(false);
 
 		primaryStage.centerOnScreen();
+		
 
+		/*
+		 * Passaggio del primaryStage al GestoreInterfacce
+		 */
+		GestoreInterfacce.getInstance().setPrimaryStage(primaryStage);
 		
 		/*
-		 * Load di HomeLogin con la chiamata al costruttore personalizzata.
+		 * Chiedo al GestoreInterfacce di visualizzare la HomeLogin
 		 */
-		AnchorPane homeLogin = null;
-		try {
-			homeLogin = FXMLLoader.<AnchorPane>load(getClass().getResource(homeLoginURL), null, null, e -> {
-				return new HomeLogin(primaryStage);
-			});
-		} catch (IOException e) {
-			AlertPanel.saysError("ERRORE: nella load di HomeLogin", e);
-		}
-
+		GestoreInterfacce.getInstance().initHomeLogin();
 		
-		/*
-		 * Creazione della Scene del login e inserimento del CSS
-		 */
-		Scene loginScene = new Scene(homeLogin);
-		loginScene.getStylesheets().add(getClass().getResource(CSSbootstrap3URL).toExternalForm());
-
 		
-		/*
-		 * Set della loginScene e visualizzazione del primaryStage
-		 */
-		primaryStage.setScene(loginScene);
 		primaryStage.show();
 
 	}
