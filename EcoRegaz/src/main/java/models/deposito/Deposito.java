@@ -24,4 +24,12 @@ public class Deposito {
 		return strumentiExtra;
 	}
 
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public void setStrumentiExtra(String strumentiExtra) {
+		this.strumentiExtra = strumentiExtra;
+	}
+
 }

@@ -44,7 +44,7 @@ public boolean aggiuntaAreaVerde(AreaVerde areaVerde) {
 		//controllo anti SQLInjection		
 		if(areaVerde.getNome().contains("'"))
 		{
-			areaVerde.getNome().replace("'", "`");
+			areaVerde.setNome(areaVerde.getNome().replace("'", "`"));
 		}
 		
 		//conversione nome ad uppercase

@@ -59,7 +59,7 @@ public class AggiuntaInterventoController {
 		//controllo anti SQLInjection		
 		if(intervento.getDescrizioneValutativa().contains("'"))
 		{
-			intervento.getDescrizioneValutativa().replace("'", "`");
+			intervento.setDescrizioneValutativa(intervento.getDescrizioneValutativa().replace("'", "`"));
 		}
 		
 		

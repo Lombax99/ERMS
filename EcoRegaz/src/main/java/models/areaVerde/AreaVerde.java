@@ -30,4 +30,9 @@ public class AreaVerde {
 		return geoPoint;
 	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+		
+	}
+
 }

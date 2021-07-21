@@ -14,14 +14,25 @@ public class ModificaDepositoController {
 		IllegalArgumentException illegal = new IllegalArgumentException();
 
 		if(dep.getDescrizione().equals(null) || dep.getStrumentiExtra().equals(null))
+		{
 			AlertPanel.saysError("Parametri null non accettabili",  illegal);
-		
+		}
 		else if (dep.getDescrizione().strip().isBlank())
+		{
 			AlertPanel.saysError("Descrizione vuota non accettabile", illegal);
-
+		}
 		else if (dep.getDescrizione().length() > 250 || dep.getStrumentiExtra().strip().length() > 250)
+		{
 			AlertPanel.saysError("Descrizione o StrumentiEntra troppo lunghi", illegal);
-
+		}
+		else if(dep.getDescrizione().contains("'"))
+		{
+			dep.setDescrizione(dep.getDescrizione().replace("'", "`"));
+		}
+		else if(dep.getStrumentiExtra().contains("'"))
+		{
+			dep.setStrumentiExtra(dep.getStrumentiExtra().replace("'", "`"));
+		} 
 		else
 			try {
 				if (PersisterDeposito.getInstance().modificaDeposito(dep))

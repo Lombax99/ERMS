@@ -60,4 +60,8 @@ public class Intervento {
 		return stringa;
 	}
 
+	public void setDescrizioneValutativa(String descrizionevalutativa) {
+		this.descrizioneValutativa = descrizionevalutativa;		
+	}
+
 }

@@ -75,7 +75,7 @@ public class FiltroInterventi implements IFiltro{
 		{
 			if(descrizione.contains("'"))
 			{
-				descrizione.replace("'", "`");
+				descrizione = descrizione.replace("'", "`");
 			}
 			
 			if(descrizione.length() > 2000)
