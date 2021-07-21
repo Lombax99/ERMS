@@ -1,7 +1,6 @@
 package main.java.controllers.interventi.gestioneInterventi;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 import main.java.application.AlertPanel;
 import main.java.persisters.interventi.PersisterInterventi;
