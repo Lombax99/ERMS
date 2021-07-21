@@ -87,7 +87,7 @@ public class PersisterAreeVerdi implements IPersisterAreeVerdi {
 		 * Verifica dell'esistenza della tabella degli Iscritti.
 		 * Se non esiste, viene creata
 		 */
-		if (!MainDB.tableExists(connection, "UPDATE INTERVENTI_TABLE SET DESCRIZIONE = 'test' WHERE ID_INTERVENTO = -100 ")) {
+		if (!MainDB.tableExists(connection, "UPDATE AREEVERDI_TABLE SET NOME = 'test' WHERE ID_GESTIONALEAREAVERDE = -100 ")) {
 			statement.execute(createTable);
 		}
 
