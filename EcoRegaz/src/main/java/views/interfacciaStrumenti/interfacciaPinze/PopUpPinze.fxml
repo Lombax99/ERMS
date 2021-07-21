@@ -6,14 +6,14 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="157.0" prefWidth="295.0" stylesheets="@../../../../resources/bootstrap3.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.views.interfacciaStrumenti.interfacciaPinze.ViewPinze">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="157.0" prefWidth="295.0" stylesheets="@../../../../resources/bootstrap3.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.views.interfacciaStrumenti.interfacciaPinze.ViewPinze">
    <children>
-      <ChoiceBox layoutX="164.0" layoutY="31.0" prefWidth="125.0" />
-      <ChoiceBox layoutX="164.0" layoutY="77.0" prefWidth="125.0" />
-      <Label layoutX="164.0" layoutY="14.0" prefHeight="17.0" prefWidth="125.0" text="Quartiere" />
+      <ChoiceBox fx:id="CondizioneField" layoutX="164.0" layoutY="31.0" prefWidth="125.0" />
+      <ChoiceBox fx:id="AppartenenzaField" layoutX="164.0" layoutY="77.0" prefWidth="125.0" />
+      <Label layoutX="164.0" layoutY="14.0" prefHeight="17.0" prefWidth="125.0" text="Condizione" />
       <Label layoutX="164.0" layoutY="61.0" prefHeight="17.0" prefWidth="125.0" text="Appartenenza" />
       <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="125.0" text="Deposito" />
-      <Button fx:id="PopUpAggiungiPinzaButton" layoutX="205.0" layoutY="119.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="83.0" text="Fine" />
+      <Button layoutX="205.0" layoutY="119.0" mnemonicParsing="false" onAction="#PopUpAggiungiPinzaHandler" prefHeight="32.0" prefWidth="83.0" text="Fine" />
       <ListView fx:id="listViewDepositi" layoutX="14.0" layoutY="32.0" prefHeight="113.0" prefWidth="131.0" />
    </children>
 </AnchorPane>
