@@ -4,6 +4,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -19,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
@@ -29,17 +31,23 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.java.application.AlertPanel;
 import main.java.controllers.gestioneAreeVerdi.VisualizzazioneAreeVerdiController;
+import main.java.controllers.interventi.gestioneInterventi.AggiuntaInterventoController;
 import main.java.controllers.interventi.gestioneIscritti.FiltroIscritti;
 import main.java.controllers.interventi.gestioneIscritti.VisualizzaElencoIscrittoController;
 import main.java.models.areaVerde.AreaVerde;
+import main.java.models.intervento.Intervento;
+import main.java.models.iscritto.Iscritto;
+import main.java.persisters.iscritti.PersisterIscritti;
 import main.java.views.Utility_SidePanel;
 
 public class ViewAggiuntaIntervento implements Initializable {
 
 	VisualizzazioneAreeVerdiController visualizzazioneAreeVerdiController;
 	VisualizzaElencoIscrittoController visualizzazioneIscrittiController;
+	AggiuntaInterventoController aggiuntaInterventoController;
+
 	AreaVerde areaVerdeSelezionata;
-	List<String> listaCV;
+	List<String> listaCV = new ArrayList<>();
 	ResultSet tuttiIscritti;
 
 
@@ -73,7 +81,7 @@ public class ViewAggiuntaIntervento implements Initializable {
 
 
 		/*
-		 * Inserimento degli iscritti delezionati
+		 * Inserimento degli iscritti selezionati
 		 */
 		for (Integer indexSelected : listaOperatori.getSelectionModel().getSelectedIndices()) {
 			try {
@@ -91,6 +99,11 @@ public class ViewAggiuntaIntervento implements Initializable {
 			AlertPanel.saysInfo("ERRORE", "Nessun operatore selezionato");
 			return;
 		}
+
+		/*
+		 * Aggiunta vera e propria
+		 */
+		aggiuntaInterventoController.aggiuntaIntervento(new Intervento(0, dataPicker.getValue(), listaCV, descrizioneArea.getText(), gravitaSpinner.getValue()), areaVerdeSelezionata);
 
 	}
 
@@ -156,6 +169,15 @@ public class ViewAggiuntaIntervento implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
+		// TODO da rimuovere
+		try {
+			PersisterIscritti.getInstance().aggiuntaIscritto(new Iscritto("Riccardo", "Evangelisti", LocalTime.now().toString()));
+			PersisterIscritti.getInstance().aggiuntaIscritto(new Iscritto("Luca", "Evangelisti", LocalTime.now().toString() + 1));
+			PersisterIscritti.getInstance().aggiuntaIscritto(new Iscritto("Marco", "Evangelisti", LocalTime.now().toString() + 2));
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} // fin qui
+
 		/*
 		 * Inizializzazione controller per la visualizza delle aree verdi
 		 */
@@ -165,6 +187,11 @@ public class ViewAggiuntaIntervento implements Initializable {
 		 * Inizializzazione controller per la visualizza degli iscritti
 		 */
 		visualizzazioneIscrittiController = new VisualizzaElencoIscrittoController();
+
+		/*
+		 * Inizializzazione controller per l'aggiunta degli interventi
+		 */
+		aggiuntaInterventoController = new AggiuntaInterventoController();
 
 		/*
 		 * Set up del dataPiker
@@ -185,11 +212,17 @@ public class ViewAggiuntaIntervento implements Initializable {
 		tuttiIscritti = visualizzazioneIscrittiController.visualizza(new FiltroIscritti());
 		try {
 			while (tuttiIscritti.next()) {
-				listaOperatori.getItems().add(tuttiIscritti.getString(2) + tuttiIscritti.getString(3));
+				listaOperatori.getItems().add(tuttiIscritti.getString(2) + " " + tuttiIscritti.getString(3));
 			}
 		} catch (SQLException e) {
 			AlertPanel.saysError("ERRORE nella visualizza degli iscritti", e);
 		}
+
+		/*
+		 * Set up di listaOperatori: possibilità di multiple selection
+		 */
+		listaOperatori.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		
 
 
 		/*
