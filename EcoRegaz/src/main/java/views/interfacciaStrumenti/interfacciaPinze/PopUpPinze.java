@@ -61,21 +61,18 @@ public class PopUpPinze implements Initializable {
 		}
 		ID_DepositoField.getItems().addAll(listaId_Depositi);
 		
-		/*ID_DepositoField.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Integer> ov, String old_val, String new_val) -> {
+		ID_DepositoField.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Integer> ov, Integer old_val, Integer new_val) -> {
 
-			int indexSelezionato = listView.getSelectionModel().getSelectedIndex();
-			areaVerdeSelezionata = listaAreeVerdi.get(indexSelezionato);
-
-			nomeField.setText(areaVerdeSelezionata.getNome());
-			quartiereField.setText(areaVerdeSelezionata.getQuartiere().toString());
-		});*/
+			int indexSelezionato = ID_DepositoField.getSelectionModel().getSelectedIndex();
+			Id_DepositoNuovaPinza = listaId_Depositi.get(indexSelezionato);
+		});
 	}
 	
 	@FXML
 	private void PopUpAggiungiPinzaHandler() {
 		
-		//Id default negativo per bloccare se non viene scelto un id deposito dalla lista
-		controllerPinze.aggiuntaNuovoStrumento(new Pinza(-1, Id_DepositoNuovaPinza, AppartenenzaField.getValue(), CondizioneField.getValue()));
+		//Id default negativo per bloccare se 
+		controllerPinze.aggiuntaNuovoStrumento(new Pinza(Id_DepositoNuovaPinza, -1, AppartenenzaField.getValue(), CondizioneField.getValue()));
 		inserisciDatiPinzaStage.close();
 		/*Pinza pinza = new Pinza(ID_DepositoField.getValue(), 0, AppartenenzaField.getValue(), CondizioneField.getValue());
 
