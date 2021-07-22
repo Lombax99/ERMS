@@ -31,11 +31,13 @@ import javafx.util.Callback;
 import main.java.application.AlertPanel;
 import main.java.controllers.strumenti.pinze.FiltroPinze;
 import main.java.controllers.strumenti.pinze.GestionePinzeController;
+import main.java.models.deposito.Deposito;
 import main.java.models.iscritto.Iscritto;
 import main.java.models.strumenti.pinza.Appartenenza;
 import main.java.models.strumenti.pinza.Condizione;
 import main.java.models.strumenti.pinza.Pinza;
 import main.java.persisters.iscritti.PersisterIscritti;
+import main.java.persisters.strumenti.deposito.PersisterDeposito;
 import main.java.persisters.strumenti.pinze.PersisterPinze;
 import main.java.views.Utility_SidePanel;
 import main.java.views.interfacciaLogin.HomeLogin;
@@ -82,9 +84,12 @@ public class ViewPinze implements Initializable {
 		
 		// TODO da rimuovere
 		try {
-			PersisterPinze.getInstance().aggiuntaNuovaPinza(new Pinza(0, 0, Appartenenza.PROPRIA, Condizione.FUNZIONANTE));
-			PersisterPinze.getInstance().aggiuntaNuovaPinza(new Pinza(0, 0, Appartenenza.PRESTATA, Condizione.FUNZIONANTE));
-			PersisterPinze.getInstance().aggiuntaNuovaPinza(new Pinza(0, 0, Appartenenza.PROPRIA, Condizione.NONFUNZIONANTE));
+			
+			PersisterDeposito.getInstance().aggiuntaDeposito(new Deposito(0, "casa", "nulla"));
+			
+			PersisterPinze.getInstance().aggiuntaNuovaPinza(new Pinza(1, 0, Appartenenza.PROPRIA, Condizione.FUNZIONANTE));
+			PersisterPinze.getInstance().aggiuntaNuovaPinza(new Pinza(1, 0, Appartenenza.PRESTATA, Condizione.FUNZIONANTE));
+			PersisterPinze.getInstance().aggiuntaNuovaPinza(new Pinza(1, 0, Appartenenza.PROPRIA, Condizione.NONFUNZIONANTE));
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		} // fin qui
