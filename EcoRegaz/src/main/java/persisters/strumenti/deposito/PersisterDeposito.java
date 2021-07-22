@@ -63,13 +63,6 @@ public class PersisterDeposito implements IPersisterDeposito{
 	private PersisterDeposito() throws SQLException {
 		
 		/*
-		 * Faccio creare le tabelle
-		 */
-		PersisterPinze.getInstance();
-		PersisterScatoleGuanti.getInstance();
-		PersisterRotoliSacchi.getInstance();
-
-		/*
 		 * Prelevo la connessione da MainDB, il quale sicuramente è già stato inizializzato
 		 */
 		connection = MainDB.connection;
@@ -101,6 +94,13 @@ public class PersisterDeposito implements IPersisterDeposito{
 	 */
 	@Override
 	public ResultSet visualizzaDepositi() throws SQLException {
+		
+		/*
+		 * Faccio creare le tabelle
+		 */
+		PersisterPinze.getInstance();
+		PersisterScatoleGuanti.getInstance();
+		PersisterRotoliSacchi.getInstance();
 		
 		/*
 		 * Vi sono una serie di select innestate perchè derby non supporta WITH
