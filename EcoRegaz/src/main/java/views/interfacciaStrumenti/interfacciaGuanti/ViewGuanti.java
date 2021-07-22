@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 
 import javax.swing.JFormattedTextField;
 
+import com.jfoenix.controls.JFXDrawer;
+
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +22,7 @@ import main.java.controllers.strumenti.guanti.GestioneScatoleGuantiController;
 import main.java.models.deposito.Deposito;
 import main.java.models.strumenti.scatolaGuanti.ScatolaGuanti;
 import main.java.models.strumenti.scatolaGuanti.Taglia;
+import main.java.views.Utility_SidePanel;
 
 public class ViewGuanti implements PropertyChangeListener, Initializable {
 
@@ -36,6 +39,10 @@ public class ViewGuanti implements PropertyChangeListener, Initializable {
 	Button aggiungi;
 	@FXML
 	Button rimuovi;
+	@FXML
+	private JFXDrawer sidePanel;
+	@FXML
+	private Button exitButton;
 
 
 	public int getID_DepositoSelezionato() {
@@ -82,7 +89,8 @@ public class ViewGuanti implements PropertyChangeListener, Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		// inizializzazione
-		visualizza(); // aka initPane
+		//visualizza(); // aka initPane
+		Utility_SidePanel.initialize(exitButton, sidePanel);
 	}
 
 

@@ -23,7 +23,6 @@ import main.java.persisters.strumenti.pinze.PersisterPinze;
 
 public class PopUpPinze implements Initializable {
 
-	private Stage inserisciDatiPinzaStage;
 	private ElencoDepositiController controllerDepositi;
 	private GestionePinzeController controllerPinze;
 	private int Id_DepositoNuovaPinza;
@@ -35,8 +34,7 @@ public class PopUpPinze implements Initializable {
 	@FXML
 	private ChoiceBox<Condizione> CondizioneField;
 	
-	public PopUpPinze(Stage inserisciDatiPinze, GestionePinzeController controllerPinze) {
-		this.inserisciDatiPinzaStage = inserisciDatiPinze;
+	public PopUpPinze(GestionePinzeController controllerPinze) {
 		this.controllerDepositi = new ElencoDepositiController();
 		this.controllerPinze = controllerPinze;
 	}

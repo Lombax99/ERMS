@@ -82,20 +82,6 @@ public class ViewPinze implements Initializable {
 
 		controllerPinze = new GestionePinzeController();
 
-		// TODO da rimuovere
-		try {
-
-			PersisterDeposito.getInstance().aggiuntaDeposito(new Deposito(0, "casa", "nulla"));
-
-			PersisterPinze.getInstance().aggiuntaNuovaPinza(new Pinza(1, 0, Appartenenza.PROPRIA, Condizione.FUNZIONANTE));
-			PersisterPinze.getInstance().aggiuntaNuovaPinza(new Pinza(1, 0, Appartenenza.PRESTATA, Condizione.FUNZIONANTE));
-			PersisterPinze.getInstance().aggiuntaNuovaPinza(new Pinza(1, 0, Appartenenza.PROPRIA, Condizione.NONFUNZIONANTE));
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		} // fin qui
-
-
-
 		// setUp delle colonne
 		Id_PinzaColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
 
@@ -109,21 +95,21 @@ public class ViewPinze implements Initializable {
 		CondizioneColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
 
 			public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
-				return new SimpleStringProperty(param.getValue().get(3).toString());
+				return new SimpleStringProperty(param.getValue().get(2).toString());
 			}
 		});
 
 		AppartenenzaColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
 
 			public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
-				return new SimpleStringProperty(param.getValue().get(2).toString());
+				return new SimpleStringProperty(param.getValue().get(1).toString());
 			}
 		});
 
 		Id_DepColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
 
 			public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
-				return new SimpleStringProperty(param.getValue().get(1).toString());
+				return new SimpleStringProperty(param.getValue().get(3).toString());
 			}
 		});
 
@@ -142,7 +128,7 @@ public class ViewPinze implements Initializable {
 		AnchorPane popUpPinze = null;
 		try {
 			popUpPinze = FXMLLoader.<AnchorPane>load(getClass().getResource(popUpURL), null, null, e -> {
-				return new PopUpPinze(inserisciDatiPinzaStage, controllerPinze);
+				return new PopUpPinze(controllerPinze);
 			});
 		} catch (IOException e) {
 			AlertPanel.saysError("ERRORE: nella load di Aggiunta pinze", e);

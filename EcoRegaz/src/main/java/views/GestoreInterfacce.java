@@ -57,7 +57,7 @@ public class GestoreInterfacce {
 	public final static String CSSbootstrap3URL = "/main/resources/bootstrap3.css";
 	public final static String homePrincipaleURL = "/main/java/views/interfacciaHome/HomePrincipale.fxml";
 	public final static String homeLoginURL = "/main/java/views/interfacciaLogin/HomeLogin.fxml";
-	public final static String homeAnalisiURL = "/main/java/views/interfacciaAnalisi/HomeAnalisi.fxml";
+	public final static String homeAnalisiURL = "/main/java/views/interfacciaAnalisi/HomeAnalisiAreeverdi.fxml";
 	public final static String homeDepositiURL = "/main/java/views/interfacciaDepositi/HomeDepositi.fxml";
 	public final static String homeInterventiURL = "/main/java/views/interfacciaInterventi/HomeInterventi.fxml";
 	public final static String homeIscrittiURL = "/main/java/views/interfacciaIscritti/HomeIscritti.fxml";

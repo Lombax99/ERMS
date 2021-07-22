@@ -1,5 +1,6 @@
 package main.java.views.interfacciaDepositi;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,17 +13,23 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import main.java.application.AlertPanel;
 import main.java.controllers.strumenti.deposito.*;
 import main.java.models.deposito.Deposito;
 import main.java.persisters.strumenti.deposito.PersisterDeposito;
 import main.java.views.Utility_SidePanel;
+import main.java.views.interfacciaStrumenti.interfacciaPinze.PopUpPinze;
 
 public class HomeDepositi implements Initializable{
 
@@ -30,6 +37,8 @@ public class HomeDepositi implements Initializable{
 	private ElencoDepositiController viewDepController;
 	private ModificaDepositoController modDepController;
 	private RimozioneDepositoController elimDepController;
+	
+	public final static String popUpURL = "/main/java/views/interfacciaDepositi/PopUpDepositi.fxml";
 	
     @FXML
     private Button AggiungiDepositoButton;
@@ -58,35 +67,6 @@ public class HomeDepositi implements Initializable{
 		
 		Utility_SidePanel.initialize(exitButton, sidePanel);
 		
-		// TODO da rimuovere
-		try {
-			PersisterDeposito.getInstance().aggiuntaDeposito(new Deposito(0, "descrizioneDep1", "molti strumenti"));
-			PersisterDeposito.getInstance().aggiuntaDeposito(new Deposito(0, "descrizioneDep2", "pochi scrumenti"));
-			PersisterDeposito.getInstance().aggiuntaDeposito(new Deposito(0, "descrizioneDep3", "POWER ALAAAAAANNNNN"));
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		} // fin qui
-		
-		
-		// riempio i dati della tabella
-		ResultSet Depositi = viewDepController.elencoDepositi();
-		
-		//testing
-		if(Depositi == null)
-		{
-			System.out.println("ouch");
-		}
-		try {
-			if(!Depositi.next())
-			{
-				System.out.println("vuoto");
-			}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-
 		Id_DepColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
 
 			public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
@@ -131,8 +111,56 @@ public class HomeDepositi implements Initializable{
 			}
 		});
 
+		this.visualizza();
+	}
+	
+	public HomeDepositi() {
+		this.aggDepController = new AggiuntaDepositoController();
+		this.viewDepController = new ElencoDepositiController();
+		this.modDepController = new ModificaDepositoController();
+		this.elimDepController = new RimozioneDepositoController();
+	}
 
+	@FXML
+	private void tastoAggiugniDepositoHandler()	{
+		/*
+		 * Creo un nuovo stage in cui viene visualizzata una listview con la lista delle aree verdi
+		 */
 
+		Stage inserisciDatiPinzaStage = new Stage();
+		AnchorPane popUpPinze = null;
+		try {
+			popUpPinze = FXMLLoader.<AnchorPane>load(getClass().getResource(popUpURL), null, null, e -> {
+				return new PopUpDeposito(aggDepController);
+			});
+		} catch (IOException e) {
+			AlertPanel.saysError("ERRORE: nella load di Aggiunta pinze", e);
+		}
+
+		Scene popUpScene = new Scene(popUpPinze);
+
+		inserisciDatiPinzaStage.setScene(popUpScene);
+		inserisciDatiPinzaStage.initModality(Modality.APPLICATION_MODAL);
+		inserisciDatiPinzaStage.setOnCloseRequest(e -> {
+			this.visualizza();
+			inserisciDatiPinzaStage.close();
+		});
+		inserisciDatiPinzaStage.show();
+	}
+	
+	private void rimuoviDepositoHandler()	{
+		
+	}
+	
+	private void modificaDepositoHandler() {
+		
+	}
+	
+	private void visualizza() {
+		
+		// riempio i dati della tabella
+		ResultSet Depositi = viewDepController.elencoDepositi();
+		
 		// popolo la tabella
 		ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
 
@@ -156,28 +184,5 @@ public class HomeDepositi implements Initializable{
 		}
 
 		tabella.setItems(data);
-	}
-	
-	public HomeDepositi() {
-		this.aggDepController = new AggiuntaDepositoController();
-		this.viewDepController = new ElencoDepositiController();
-		this.modDepController = new ModificaDepositoController();
-		this.elimDepController = new RimozioneDepositoController();
-	}
-
-	private void tastoAggiugniDepositoHandler()	{
-		
-	}
-	
-	private void rimuoviDepositoHandler()	{
-		
-	}
-	
-	private void modificaDepositoHandler() {
-		
-	}
-	
-	private void visualizza() {
-		
 	}
 }
