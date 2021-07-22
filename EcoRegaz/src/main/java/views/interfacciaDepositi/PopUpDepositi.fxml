@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="193.0" prefWidth="295.0" stylesheets="@../../../../resources/bootstrap3.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.views.interfacciaDepositi.PopUpDeposito">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="193.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.views.interfacciaDepositi.PopUpDeposito">
    <children>
       <TextField fx:id="DescrizioneField" layoutX="14.0" layoutY="19.0" prefHeight="66.0" prefWidth="265.0" />
       <TextField fx:id="StrumentiExtraField" layoutX="15.0" layoutY="103.0" prefHeight="48.0" prefWidth="265.0" />
