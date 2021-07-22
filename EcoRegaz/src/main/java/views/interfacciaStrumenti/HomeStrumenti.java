@@ -11,6 +11,7 @@ public class HomeStrumenti {
 	 */
 	@FXML
 	void openGuantiHandler(ActionEvent event) {
+		
 		GestoreInterfacce.getInstance().initViewGuanti();
 	}
 
@@ -20,6 +21,7 @@ public class HomeStrumenti {
 	 */
 	@FXML
 	void openPinzeHandler(ActionEvent event) {
+		
 		GestoreInterfacce.getInstance().initViewPinze();
 	}
 
