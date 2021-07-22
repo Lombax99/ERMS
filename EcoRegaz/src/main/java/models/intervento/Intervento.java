@@ -55,7 +55,7 @@ public class Intervento {
 		String stringa = "";
 		
 		for(String cf: elencoCFPartecipanti) {
-			stringa.concat(cf + ";");
+			stringa = stringa.concat(cf + "&&&");
 		}
 		return stringa;
 	}

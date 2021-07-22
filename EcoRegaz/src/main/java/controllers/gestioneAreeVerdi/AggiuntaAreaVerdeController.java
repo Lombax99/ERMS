@@ -1,6 +1,5 @@
 package main.java.controllers.gestioneAreeVerdi;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -55,7 +54,7 @@ public boolean aggiuntaAreaVerde(AreaVerde areaVerde) {
 		//controllo esistenza AreaVerde DB locale
 		List<AreaVerde> check = null;
 		try {
-			check = PersisterAreeVerdi.getInstance().visualizzaAreeVerdi(areaVerde.getNome());
+			check = PersisterAreeVerdi.getInstance().checkEsistenzaAreaVerde(areaVerde.getNome());
 		} catch (SQLException e1) {
 			//lancio messaggio di errore
 			AlertPanel.saysError("Errore nella visualizza per check DB area verde", e1);

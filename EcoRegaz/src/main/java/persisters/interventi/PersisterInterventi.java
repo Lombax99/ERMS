@@ -29,8 +29,8 @@ public class PersisterInterventi implements IPersisterInterventi {
 	 * Ci possono stare al massimo 30 partecipanti. <br>
 	 */
 	private static String createTable = "CREATE TABLE INTERVENTI_TABLE (ID_INTERVENTO INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY, " + " ID_GESTIONALEAREAVERDE INTEGER NOT NULL, "
-				+ " DATA_INTERVENTO DATE NOT NULL, " + " GRAVITA INTEGER NOT NULL CHECK(GRAVITA > 0 AND GRAVITA <= 5), " + " DESCRIZIONE VARCHAR(2000) NOT NULL) "
-				+ " ELENCO_PARTECIPANTI VARCHAR(550) NOT NULL, " + " UNIQUE (ID_GESTIONALEAREAVERDE, DATA_INTERVENTO) ";
+				+ " DATA_INTERVENTO DATE NOT NULL, " + " GRAVITA INTEGER NOT NULL CHECK(GRAVITA > 0 AND GRAVITA <= 5), " + " DESCRIZIONE VARCHAR(2000) NOT NULL, "
+				+ " ELENCO_PARTECIPANTI VARCHAR(550) NOT NULL, " + " UNIQUE (ID_GESTIONALEAREAVERDE, DATA_INTERVENTO)) ";
 
 	/**
 	 * Pattern Singleton. <br>
@@ -84,7 +84,7 @@ public class PersisterInterventi implements IPersisterInterventi {
 	/**
 	 * Metodo che restituisce un ResultSet in base al FiltroInterventi. <br>
 	 * Il ResultSet è formato da: <br>
-	 * I.ID_INTERVENTO, I.DATA_INTERVENTO, I.GRAVITA, I.DESCRIZIONE, A.ID_GESTIONALEAREAVERDE, A.NOME, A.COORDINATE, A.QUARTIERE <br>
+	 * I.ID_INTERVENTO, I.DATA_INTERVENTO, I.GRAVITA, I.DESCRIZIONE, A.ID_GESTIONALEAREAVERDE, A.NOME, A.COORDINATE, A.QUARTIERE, I.ELENCO_PARTECIPANTI <br>
 	 * <br>
 	 * Costruisce man mano la Stringa che costituisce la query SELECT. <br>
 	 * La prima Stringa è un "WHERE ..." (che seleziona tutto) e le stringhe successive sono un "AND ..." <br>
@@ -95,8 +95,8 @@ public class PersisterInterventi implements IPersisterInterventi {
 	@Override
 	public ResultSet visualizzaInterventi(FiltroInterventi filtro) throws SQLException {
 		// Stringa iniziale: è l'unico where, tutti gli altri sono o AND o stringa vuota
-		String initial_String = "SELECT 	I.ID_INTERVENTO, I.DATA_INTERVENTO, I.GRAVITA, I.DESCRIZIONE, A.* " + "FROM 	INTERVENTI_TABLE I, AREEVERDI_TABLE A "
-					+ "WHERE	I.ID_GESTIONALEAREAVERDE = A.ID_GESTIONALEAREAVERDE ";
+		String initial_String = "SELECT I.ID_INTERVENTO, I.DATA_INTERVENTO, I.GRAVITA, I.DESCRIZIONE, A.* , I.ELENCO_PARTECIPANTI " + "FROM INTERVENTI_TABLE I, AREEVERDI_TABLE A "
+					+ "WHERE I.ID_GESTIONALEAREAVERDE = A.ID_GESTIONALEAREAVERDE ";
 
 		// data inizio: AND I:DATA_INTERVENTO >= '2021-05-09'
 		String dataInizio_String = "";

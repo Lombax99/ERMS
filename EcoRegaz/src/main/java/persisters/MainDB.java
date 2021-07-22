@@ -58,7 +58,7 @@ public class MainDB {
 		/*
 		 * We want to control transactions manually. Autocommit is on by default in JDBC.
 		 */
-		connection.setAutoCommit(true);
+		connection.setAutoCommit(false);
 	}
 
 	

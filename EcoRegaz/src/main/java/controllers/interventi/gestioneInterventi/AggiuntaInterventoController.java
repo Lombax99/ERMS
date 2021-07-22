@@ -24,7 +24,7 @@ public class AggiuntaInterventoController {
 		
 		aggAreaVerdeController.aggiuntaAreaVerde(areaVerde);
 		
-		//controlli dell'imput
+		//controlli dell'input
 		if(intervento == null)
 		{
 			AlertPanel.saysInfo("ERRORE", "L'intervento inserito è null");
@@ -89,7 +89,7 @@ public class AggiuntaInterventoController {
 			return false;
 		}
 		try {
-			if(!check.next())
+			if(check.next())
 			{
 				AlertPanel.saysInfo("ERRORE", "Esiste un intervento con stessa data e luogo nel DB");
 				return false;

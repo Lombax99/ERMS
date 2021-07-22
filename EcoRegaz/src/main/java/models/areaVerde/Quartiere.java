@@ -1,7 +1,9 @@
 package main.java.models.areaVerde;
 
 public enum Quartiere {
+
 	BORGOPANIGALE_RENO, PORTO_SARAGOZZA, NAVILE, SANDONATO_SANVITALE, SAVENA, SANTOSTEFANO;
+
 
 	/**
 	 * Metodo che da stringa restituisce l'enum corretto.
@@ -25,33 +27,44 @@ public enum Quartiere {
 		}
 	}
 
+
 	/**
 	 * Metodo adattato che restituisce la corrispondente forma corretta.
 	 */
 	@Override
 	public String toString() {
+
+		String stringa;
 		switch (this) {
 		case BORGOPANIGALE_RENO:
-			return "Borgo Panigale - Reno";
+			stringa = "Borgo Panigale - Reno";
+			break;
 
 		case PORTO_SARAGOZZA:
-			return "Porto - Saragozza";
+			stringa = "Porto - Saragozza";
+			break;
 
 		case NAVILE:
-			return "Navile";
+			stringa = "Navile";
+			break;
 
 		case SANDONATO_SANVITALE:
-			return "San Donato - San Vitale";
+			stringa = "San Donato - San Vitale";
+			break;
 
 		case SAVENA:
-			return "Savena";
+			stringa = "Savena";
+			break;
 
 		case SANTOSTEFANO:
-			return "Santo Stefano";
+			stringa = "Santo Stefano";
+			break;
 
 		default:
 			throw new IllegalArgumentException();
 		}
+
+		return stringa;
 	}
 
 }

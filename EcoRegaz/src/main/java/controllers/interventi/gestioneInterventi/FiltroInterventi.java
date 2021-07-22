@@ -25,7 +25,7 @@ public class FiltroInterventi implements IFiltro{
 	private Optional<String> descrizione;
 	private Optional<Integer> idGestionaleAreaVerde;
 	
-	public void FiltroIscritti() {
+	public FiltroInterventi() {
 		this.dataInizio = Optional.empty();
 		this.dataFine = Optional.empty();
 		this.quartiere = Optional.empty();

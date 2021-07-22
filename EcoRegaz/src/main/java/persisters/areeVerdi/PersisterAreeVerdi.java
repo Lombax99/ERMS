@@ -44,6 +44,7 @@ public class PersisterAreeVerdi implements IPersisterAreeVerdi {
 				+ " QUARTIERE VARCHAR(30) NOT NULL CHECK(QUARTIERE = 'San Donato - San Vitale' " + " OR QUARTIERE = 'Borgo Panigale - Reno' " + " OR QUARTIERE = 'Navile' "
 				+ " OR QUARTIERE = 'Savena' " + " OR QUARTIERE = 'Porto - Saragozza' " + " OR QUARTIERE = 'Santo Stefano' " + " ))";
 
+
 	/**
 	 * Pattern Singleton. <br>
 	 * L'eccezione viene lanciata perché nel costruttore qualcosa può andare storto.
@@ -57,7 +58,9 @@ public class PersisterAreeVerdi implements IPersisterAreeVerdi {
 		return instance;
 	}
 
+
 	private static PersisterAreeVerdi instance = null;
+
 
 	/**
 	 * Costruttore: <br>
@@ -93,6 +96,7 @@ public class PersisterAreeVerdi implements IPersisterAreeVerdi {
 
 	}
 
+
 	/**
 	 * Metodo che prima cerca l'area verde all'interno del database locale <br>
 	 * altrimenti cerca nel database online.
@@ -103,7 +107,7 @@ public class PersisterAreeVerdi implements IPersisterAreeVerdi {
 	public List<AreaVerde> visualizzaAreeVerdi(String nomeAreaVerde) throws SQLException {
 
 		// ricerca del nome nel database locale
-		String selectString = "SELECT *		FROM AREEVERDI_TABLE	WHERE NOME LIKE '%" + nomeAreaVerde + "%'";
+		String selectString = "SELECT * FROM AREEVERDI_TABLE WHERE NOME LIKE '%" + nomeAreaVerde + "%'";
 
 		// esecuzione effettiva della SELECT
 		ResultSet resultSet = statement.executeQuery(selectString);
@@ -111,7 +115,7 @@ public class PersisterAreeVerdi implements IPersisterAreeVerdi {
 		List<AreaVerde> lista = new ArrayList<>();
 
 		while (resultSet.next()) {
-			lista.add(new AreaVerde(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), Quartiere.valueOf(resultSet.getString(4))));
+			lista.add(new AreaVerde(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), Quartiere.toEnum(resultSet.getString(4))));
 		}
 
 		// se la lista è vuota, effettua la richiesta ad database online
@@ -126,6 +130,31 @@ public class PersisterAreeVerdi implements IPersisterAreeVerdi {
 		return lista;
 
 	}
+
+
+	/**
+	 * Funzione utile sono dal controller
+	 * 
+	 * @param nomeAreaVerde
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<AreaVerde> checkEsistenzaAreaVerde(String nomeAreaVerde) throws SQLException {
+		// ricerca del nome nel database locale
+		String selectString = "SELECT * FROM AREEVERDI_TABLE WHERE NOME LIKE '%" + nomeAreaVerde + "%'";
+
+		// esecuzione effettiva della SELECT
+		ResultSet resultSet = statement.executeQuery(selectString);
+
+		List<AreaVerde> lista = new ArrayList<>();
+
+		while (resultSet.next()) {
+			lista.add(new AreaVerde(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), Quartiere.toEnum(resultSet.getString(4))));
+		}
+
+		return lista;
+	}
+
 
 	/**
 	 * Metodo che richiede le aree verdi al database online data una stringa. <br>
@@ -196,7 +225,7 @@ public class PersisterAreeVerdi implements IPersisterAreeVerdi {
 		return lista;
 	}
 
-	
+
 	/**
 	 * Metodo che aggiunge una Area Verde al DB usando direttamente una query INSERT.
 	 * 
