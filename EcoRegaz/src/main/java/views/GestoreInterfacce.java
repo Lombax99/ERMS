@@ -99,7 +99,6 @@ public class GestoreInterfacce {
 		 * Creazione della Scene del login
 		 */
 		Scene loginScene = new Scene(homeLogin);
-		// loginScene.getStylesheets().add(getClass().getResource(CSSbootstrap3URL).toExternalForm()); TODO rimuovere?
 
 		/*
 		 * Set della loginScene e visualizzazione del primaryStage
@@ -154,7 +153,6 @@ public class GestoreInterfacce {
 			 * Creazione della Scene di homePrincipale
 			 */
 			homePrincipaleScene = new Scene(homePrincipale);
-			// homePrincipaleScene.getStylesheets().add(getClass().getResource(CSSbootstrap3URL).toExternalForm()); TODO rimuovere?
 
 
 			/*
