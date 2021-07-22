@@ -12,14 +12,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
-import javafx.stage.Stage;
 import main.java.application.AlertPanel;
 import main.java.controllers.strumenti.deposito.ElencoDepositiController;
 import main.java.controllers.strumenti.pinze.GestionePinzeController;
 import main.java.models.strumenti.pinza.Appartenenza;
 import main.java.models.strumenti.pinza.Condizione;
 import main.java.models.strumenti.pinza.Pinza;
-import main.java.persisters.strumenti.pinze.PersisterPinze;
 
 public class PopUpPinze implements Initializable {
 

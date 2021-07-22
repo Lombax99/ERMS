@@ -94,6 +94,7 @@ public class ViewGuanti implements PropertyChangeListener, Initializable {
 	}
 
 
+	@SuppressWarnings("unused")//TODO togliere
 	private void visualizza() {
 		ObservableList<ResultSet> depositi = FXCollections.observableArrayList(depositoControllerReference.elencoDepositi());
 		ListView<Deposito> depositoDaSelezionare = new ListView<Deposito>();

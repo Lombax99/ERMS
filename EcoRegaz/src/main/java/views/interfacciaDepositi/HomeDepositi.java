@@ -26,16 +26,15 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import main.java.application.AlertPanel;
 import main.java.controllers.strumenti.deposito.*;
-import main.java.models.deposito.Deposito;
-import main.java.persisters.strumenti.deposito.PersisterDeposito;
 import main.java.views.Utility_SidePanel;
-import main.java.views.interfacciaStrumenti.interfacciaPinze.PopUpPinze;
 
 public class HomeDepositi implements Initializable{
 
 	private AggiuntaDepositoController aggDepController;
 	private ElencoDepositiController viewDepController;
+	@SuppressWarnings("unused") //TODO togliere
 	private ModificaDepositoController modDepController;
+	@SuppressWarnings("unused") //TODO togliere
 	private RimozioneDepositoController elimDepController;
 	
 	public final static String popUpURL = "/main/java/views/interfacciaDepositi/PopUpDepositi.fxml";
@@ -148,10 +147,12 @@ public class HomeDepositi implements Initializable{
 		inserisciDatiPinzaStage.show();
 	}
 	
+	@SuppressWarnings("unused") //TODO togliere
 	private void rimuoviDepositoHandler()	{
 		
 	}
 	
+	@SuppressWarnings("unused") //TODO togliere
 	private void modificaDepositoHandler() {
 		
 	}

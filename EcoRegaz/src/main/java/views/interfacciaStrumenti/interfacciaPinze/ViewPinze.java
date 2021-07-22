@@ -5,7 +5,6 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.StringTokenizer;
 
 import com.jfoenix.controls.JFXDrawer;
 
@@ -18,8 +17,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -31,16 +28,7 @@ import javafx.util.Callback;
 import main.java.application.AlertPanel;
 import main.java.controllers.strumenti.pinze.FiltroPinze;
 import main.java.controllers.strumenti.pinze.GestionePinzeController;
-import main.java.models.deposito.Deposito;
-import main.java.models.iscritto.Iscritto;
-import main.java.models.strumenti.pinza.Appartenenza;
-import main.java.models.strumenti.pinza.Condizione;
-import main.java.models.strumenti.pinza.Pinza;
-import main.java.persisters.iscritti.PersisterIscritti;
-import main.java.persisters.strumenti.deposito.PersisterDeposito;
-import main.java.persisters.strumenti.pinze.PersisterPinze;
 import main.java.views.Utility_SidePanel;
-import main.java.views.interfacciaLogin.HomeLogin;
 
 public class ViewPinze implements Initializable {
 
