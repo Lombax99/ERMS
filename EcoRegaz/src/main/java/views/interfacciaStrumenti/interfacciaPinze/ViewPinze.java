@@ -94,68 +94,7 @@ public class ViewPinze implements Initializable {
 			e1.printStackTrace();
 		} // fin qui
 
-		/*
-		 * setUp tabella grafica
-		 */
-		//prendo tutte le pinze con un filtro vuoto
-		ResultSet ElencoPinze = controllerPinze.elencoStrumenti(new FiltroPinze());
-
-
-		//setUp delle colonne
-		Id_PinzaColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
-
-			public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
-				// param.getValue() restituisce l'istanza ObservableList<String> di una particolare riga,
-				// .get(1) prende il primo parametro della riga
-				return new SimpleStringProperty(param.getValue().get(0).toString());
-			}
-		});
-
-		CondizioneColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
-
-			public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
-				return new SimpleStringProperty(param.getValue().get(3).toString());
-			}
-		});
-
-		AppartenenzaColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
-
-			public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
-				return new SimpleStringProperty(param.getValue().get(2).toString());
-			}
-		});
-
-		Id_DepColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
-
-			public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
-				return new SimpleStringProperty(param.getValue().get(1).toString());
-			}
-		});
-
-
-		// popolo la tabella
-		ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
-
-		// Iterate Row
-		try {
-			while (ElencoPinze.next()) {
-
-				ObservableList<String> row = FXCollections.observableArrayList();
-
-				// Iterate Column
-				for (int i = 1; i <= ElencoPinze.getMetaData().getColumnCount(); i++) {
-					
-					row.add(ElencoPinze.getString(i));
-				}
-				data.add(row);
-			}
-
-		} catch (SQLException e) {
-			AlertPanel.saysError("ERRORE nella popolazione della tabella", e);
-		}
-
-		tabella.setItems(data);
-		
+		this.stampa();
 	}
 
 
@@ -181,5 +120,67 @@ public class ViewPinze implements Initializable {
 		inserisciDatiPinzaStage.setScene(popUpScene);
 		inserisciDatiPinzaStage.initModality(Modality.APPLICATION_MODAL);
 		inserisciDatiPinzaStage.show();
+	}
+	
+	
+	//stampa a video della tabella
+	private void stampa() {
+		//prendo tutte le pinze con un filtro vuoto
+				ResultSet ElencoPinze = controllerPinze.elencoStrumenti(new FiltroPinze());
+
+
+				//setUp delle colonne
+				Id_PinzaColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
+
+					public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
+						// param.getValue() restituisce l'istanza ObservableList<String> di una particolare riga,
+						// .get(1) prende il primo parametro della riga
+						return new SimpleStringProperty(param.getValue().get(0).toString());
+					}
+				});
+
+				CondizioneColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
+
+					public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
+						return new SimpleStringProperty(param.getValue().get(3).toString());
+					}
+				});
+
+				AppartenenzaColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
+
+					public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
+						return new SimpleStringProperty(param.getValue().get(2).toString());
+					}
+				});
+
+				Id_DepColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
+
+					public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
+						return new SimpleStringProperty(param.getValue().get(1).toString());
+					}
+				});
+
+
+				// popolo la tabella
+				ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
+
+				// Iterate Row
+				try {
+					while (ElencoPinze.next()) {
+
+						ObservableList<String> row = FXCollections.observableArrayList();
+
+						// Iterate Column
+						for (int i = 1; i <= ElencoPinze.getMetaData().getColumnCount(); i++) {
+							
+							row.add(ElencoPinze.getString(i));
+						}
+						data.add(row);
+					}
+
+				} catch (SQLException e) {
+					AlertPanel.saysError("ERRORE nella popolazione della tabella", e);
+				}
+				tabella.setItems(data);
 	}
 }
