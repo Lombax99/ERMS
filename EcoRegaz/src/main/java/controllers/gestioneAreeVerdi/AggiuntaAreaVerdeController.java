@@ -1,6 +1,8 @@
 package main.java.controllers.gestioneAreeVerdi;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import main.java.application.AlertPanel;
 import main.java.models.areaVerde.AreaVerde;
@@ -50,6 +52,19 @@ public boolean aggiuntaAreaVerde(AreaVerde areaVerde) {
 		//conversione nome ad uppercase
 		areaVerde.getNome().toUpperCase();
 		
+		//controllo esistenza AreaVerde DB locale
+		List<AreaVerde> check = null;
+		try {
+			check = PersisterAreeVerdi.getInstance().visualizzaAreeVerdi(areaVerde.getNome());
+		} catch (SQLException e1) {
+			//lancio messaggio di errore
+			AlertPanel.saysError("Errore nella visualizza per check DB area verde", e1);
+		}
+		if(!check.isEmpty())
+		{
+			AlertPanel.saysInfo("ERRORE", "AreaVerde già presente nel DB");
+			return false;
+		}
 		
 		//evocazione persister normale
 		try {
