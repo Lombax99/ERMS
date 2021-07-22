@@ -8,7 +8,6 @@ import main.java.controllers.IFiltro;
 import main.java.controllers.strumenti.IGestioneStrumentiController;
 import main.java.models.strumenti.IStrumento;
 import main.java.models.strumenti.pinza.Pinza;
-import main.java.persisters.iscritti.PersisterIscritti;
 import main.java.persisters.strumenti.pinze.PersisterPinze;
 
 public class GestionePinzeController  implements IGestioneStrumentiController{
