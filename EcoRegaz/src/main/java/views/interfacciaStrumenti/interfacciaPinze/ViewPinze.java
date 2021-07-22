@@ -23,13 +23,13 @@ import main.java.controllers.strumenti.pinze.GestionePinzeController;
 import main.java.models.strumenti.pinza.Appartenenza;
 import main.java.models.strumenti.pinza.Condizione;
 import main.java.views.Utility_SidePanel;
+import main.java.views.interfacciaLogin.HomeLogin;
 
 public class ViewPinze implements Initializable {
 
 	public final static String popUpURL = "/main/java/views/interfacciaStrumenti/interfacciaPinze/PopUpPinze.fxml";
 
 	private GestionePinzeController controllerPinze;
-	private Stage inserisciDatiPinzaStage = new Stage();
 
 	/*
 	 * Definizione dei componenti grafici
@@ -41,12 +41,6 @@ public class ViewPinze implements Initializable {
 	private Button exitButton;
 	@FXML
 	private ListView<String> listViewDepositi;
-	@FXML
-	private ChoiceBox<Integer> ID_DepositoField;
-	@FXML
-	private ChoiceBox<Appartenenza> appartenenzaField;
-	@FXML
-	private ChoiceBox<Condizione> condizioneField;
     @FXML
     private Button fineButton;
 
@@ -84,9 +78,12 @@ public class ViewPinze implements Initializable {
 		 * Creo un nuovo stage in cui viene visualizzata una listview con la lista delle aree verdi
 		 */
 
+		Stage inserisciDatiPinzaStage = new Stage();
 		AnchorPane popUpPinze = null;
 		try {
-			popUpPinze = FXMLLoader.<AnchorPane>load(getClass().getResource(popUpURL));
+			popUpPinze = FXMLLoader.<AnchorPane>load(getClass().getResource(popUpURL), null, null, e -> {
+				return new PopUpPinze(inserisciDatiPinzaStage);
+			});
 		} catch (IOException e) {
 			AlertPanel.saysError("ERRORE: nella load di Aggiunta pinze", e);
 		}
@@ -96,18 +93,6 @@ public class ViewPinze implements Initializable {
 		inserisciDatiPinzaStage.setScene(popUpScene);
 		inserisciDatiPinzaStage.initModality(Modality.APPLICATION_MODAL);
 		inserisciDatiPinzaStage.show();
-		
-		fineButton.setOnAction(e ->{
-			popUpAggiungiPinzaHandler();
-		});
-		
-		for (Appartenenza appartenenza : Appartenenza.values()) {
-			appartenenzaField.getItems().add(appartenenza);
-		}
-
-		for (Condizione condizione : Condizione.values()) {
-			condizioneField.getItems().add(condizione);
-		}
 		
 		/*
 		 * Popolamento della lista 
@@ -128,14 +113,5 @@ public class ViewPinze implements Initializable {
 		/*listView.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String old_val, String new_val) -> {
 		
 			selezionaAreaVerdeStage.close();*/
-	}
-
-
-
-	private void popUpAggiungiPinzaHandler() {
-		inserisciDatiPinzaStage.close();
-		/*Pinza pinza = new Pinza(ID_DepositoField.getValue(), 0, AppartenenzaField.getValue(), CondizioneField.getValue());
-		
-		controllerPinze.aggiuntaNuovoStrumento(pinza);*/
 	}
 }
