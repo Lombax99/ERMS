@@ -67,6 +67,17 @@ public class GestionePinzeController  implements IGestioneStrumentiController{
 			AlertPanel.saysInfo("ERRORE", "L'appartenenza inserita è null");
 			return false;
 		}
+		
+		/*
+		 * TODO
+		 * cambiare per un controllo che verifichi se l'id è stato selezionato nella view o no
+		 * per ora ho messo questo ipotizzando che non ci siano mai ID negativi nei depositi
+		 */
+		if(pinza.getId_Deposito() < 0)
+		{
+			AlertPanel.saysInfo("ERRORE", "Selezionare un Id_Deposito");
+			return false;
+		}
 					
 		try{
 			if (PersisterPinze.getInstance().aggiuntaNuovaPinza(pinza))

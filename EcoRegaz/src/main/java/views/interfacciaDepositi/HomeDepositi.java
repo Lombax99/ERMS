@@ -70,6 +70,21 @@ public class HomeDepositi implements Initializable{
 		
 		// riempio i dati della tabella
 		ResultSet Depositi = viewDepController.elencoDepositi();
+		
+		//testing
+		if(Depositi == null)
+		{
+			System.out.println("ouch");
+		}
+		try {
+			if(!Depositi.next())
+			{
+				System.out.println("vuoto");
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 
 		Id_DepColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {

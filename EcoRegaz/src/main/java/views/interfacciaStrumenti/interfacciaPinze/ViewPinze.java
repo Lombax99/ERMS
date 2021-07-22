@@ -170,7 +170,7 @@ public class ViewPinze implements Initializable {
 		AnchorPane popUpPinze = null;
 		try {
 			popUpPinze = FXMLLoader.<AnchorPane>load(getClass().getResource(popUpURL), null, null, e -> {
-				return new PopUpPinze(inserisciDatiPinzaStage);
+				return new PopUpPinze(inserisciDatiPinzaStage, controllerPinze);
 			});
 		} catch (IOException e) {
 			AlertPanel.saysError("ERRORE: nella load di Aggiunta pinze", e);

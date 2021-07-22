@@ -15,13 +15,18 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import main.java.application.AlertPanel;
 import main.java.controllers.strumenti.deposito.ElencoDepositiController;
+import main.java.controllers.strumenti.pinze.GestionePinzeController;
 import main.java.models.strumenti.pinza.Appartenenza;
 import main.java.models.strumenti.pinza.Condizione;
+import main.java.models.strumenti.pinza.Pinza;
+import main.java.persisters.strumenti.pinze.PersisterPinze;
 
 public class PopUpPinze implements Initializable {
 
 	private Stage inserisciDatiPinzaStage;
 	private ElencoDepositiController controllerDepositi;
+	private GestionePinzeController controllerPinze;
+	private int Id_DepositoNuovaPinza;
 	
 	@FXML
 	private ListView<Integer> ID_DepositoField;
@@ -30,9 +35,10 @@ public class PopUpPinze implements Initializable {
 	@FXML
 	private ChoiceBox<Condizione> CondizioneField;
 	
-	public PopUpPinze(Stage inserisciDatiPinze) {
+	public PopUpPinze(Stage inserisciDatiPinze, GestionePinzeController controllerPinze) {
 		this.inserisciDatiPinzaStage = inserisciDatiPinze;
 		this.controllerDepositi = new ElencoDepositiController();
+		this.controllerPinze = controllerPinze;
 	}
 	
 	@Override
@@ -67,6 +73,9 @@ public class PopUpPinze implements Initializable {
 	
 	@FXML
 	private void PopUpAggiungiPinzaHandler() {
+		
+		//Id default negativo per bloccare se non viene scelto un id deposito dalla lista
+		controllerPinze.aggiuntaNuovoStrumento(new Pinza(-1, Id_DepositoNuovaPinza, AppartenenzaField.getValue(), CondizioneField.getValue()));
 		inserisciDatiPinzaStage.close();
 		/*Pinza pinza = new Pinza(ID_DepositoField.getValue(), 0, AppartenenzaField.getValue(), CondizioneField.getValue());
 
