@@ -58,11 +58,11 @@ public class ViewPinze implements Initializable {
 	private Button exitButton;
 	@FXML
 	private ListView<String> listViewDepositi;
-    @FXML
-    private Button fineButton;
+	@FXML
+	private Button fineButton;
 	@FXML
 	private TableView<ObservableList<String>> tabella;
-    @FXML
+	@FXML
 	private TableColumn<ObservableList<String>, String> Id_PinzaColumn;
 	@FXML
 	private TableColumn<ObservableList<String>, String> CondizioneColumn;
@@ -70,7 +70,7 @@ public class ViewPinze implements Initializable {
 	private TableColumn<ObservableList<String>, String> AppartenenzaColumn;
 	@FXML
 	private TableColumn<ObservableList<String>, String> Id_DepColumn;
-	
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -81,18 +81,51 @@ public class ViewPinze implements Initializable {
 		Utility_SidePanel.initialize(exitButton, sidePanel);
 
 		controllerPinze = new GestionePinzeController();
-		
+
 		// TODO da rimuovere
 		try {
-			
+
 			PersisterDeposito.getInstance().aggiuntaDeposito(new Deposito(0, "casa", "nulla"));
-			
+
 			PersisterPinze.getInstance().aggiuntaNuovaPinza(new Pinza(1, 0, Appartenenza.PROPRIA, Condizione.FUNZIONANTE));
 			PersisterPinze.getInstance().aggiuntaNuovaPinza(new Pinza(1, 0, Appartenenza.PRESTATA, Condizione.FUNZIONANTE));
 			PersisterPinze.getInstance().aggiuntaNuovaPinza(new Pinza(1, 0, Appartenenza.PROPRIA, Condizione.NONFUNZIONANTE));
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		} // fin qui
+
+
+
+		// setUp delle colonne
+		Id_PinzaColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
+
+			public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
+				// param.getValue() restituisce l'istanza ObservableList<String> di una particolare riga,
+				// .get(1) prende il primo parametro della riga
+				return new SimpleStringProperty(param.getValue().get(0).toString());
+			}
+		});
+
+		CondizioneColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
+
+			public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
+				return new SimpleStringProperty(param.getValue().get(3).toString());
+			}
+		});
+
+		AppartenenzaColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
+
+			public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
+				return new SimpleStringProperty(param.getValue().get(2).toString());
+			}
+		});
+
+		Id_DepColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
+
+			public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
+				return new SimpleStringProperty(param.getValue().get(1).toString());
+			}
+		});
 
 		this.stampa();
 	}
@@ -121,69 +154,38 @@ public class ViewPinze implements Initializable {
 		inserisciDatiPinzaStage.initModality(Modality.APPLICATION_MODAL);
 		inserisciDatiPinzaStage.setOnCloseRequest(e -> {
 			this.stampa();
+			inserisciDatiPinzaStage.close();
 		});
 		inserisciDatiPinzaStage.show();
 	}
-	
-	
-	//stampa a video della tabella
+
+
+	// stampa a video della tabella
 	private void stampa() {
-		//prendo tutte le pinze con un filtro vuoto
-				ResultSet ElencoPinze = controllerPinze.elencoStrumenti(new FiltroPinze());
+		// prendo tutte le pinze con un filtro vuoto
+		ResultSet ElencoPinze = controllerPinze.elencoStrumenti(new FiltroPinze());
 
 
-				//setUp delle colonne
-				Id_PinzaColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
+		// popolo la tabella
+		ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
 
-					public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
-						// param.getValue() restituisce l'istanza ObservableList<String> di una particolare riga,
-						// .get(1) prende il primo parametro della riga
-						return new SimpleStringProperty(param.getValue().get(0).toString());
-					}
-				});
+		// Iterate Row
+		try {
+			while (ElencoPinze.next()) {
 
-				CondizioneColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
+				ObservableList<String> row = FXCollections.observableArrayList();
 
-					public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
-						return new SimpleStringProperty(param.getValue().get(3).toString());
-					}
-				});
+				// Iterate Column
+				for (int i = 1; i <= ElencoPinze.getMetaData().getColumnCount(); i++) {
 
-				AppartenenzaColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
-
-					public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
-						return new SimpleStringProperty(param.getValue().get(2).toString());
-					}
-				});
-
-				Id_DepColumn.setCellValueFactory(new Callback<CellDataFeatures<ObservableList<String>, String>, ObservableValue<String>>() {
-
-					public ObservableValue<String> call(CellDataFeatures<ObservableList<String>, String> param) {
-						return new SimpleStringProperty(param.getValue().get(1).toString());
-					}
-				});
-
-
-				// popolo la tabella
-				ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
-
-				// Iterate Row
-				try {
-					while (ElencoPinze.next()) {
-
-						ObservableList<String> row = FXCollections.observableArrayList();
-
-						// Iterate Column
-						for (int i = 1; i <= ElencoPinze.getMetaData().getColumnCount(); i++) {
-							
-							row.add(ElencoPinze.getString(i));
-						}
-						data.add(row);
-					}
-
-				} catch (SQLException e) {
-					AlertPanel.saysError("ERRORE nella popolazione della tabella", e);
+					row.add(ElencoPinze.getString(i));
 				}
-				tabella.setItems(data);
+				data.add(row);
+			}
+
+		} catch (SQLException e) {
+			AlertPanel.saysError("ERRORE nella popolazione della tabella", e);
+		}
+		tabella.setItems(data);
 	}
 }

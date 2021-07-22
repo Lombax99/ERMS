@@ -73,7 +73,6 @@ public class PopUpPinze implements Initializable {
 		
 		//Id default negativo per bloccare se 
 		controllerPinze.aggiuntaNuovoStrumento(new Pinza(Id_DepositoNuovaPinza, -1, AppartenenzaField.getValue(), CondizioneField.getValue()));
-		inserisciDatiPinzaStage.close();
 		/*Pinza pinza = new Pinza(ID_DepositoField.getValue(), 0, AppartenenzaField.getValue(), CondizioneField.getValue());
 
 		controllerPinze.aggiuntaNuovoStrumento(pinza);*/
