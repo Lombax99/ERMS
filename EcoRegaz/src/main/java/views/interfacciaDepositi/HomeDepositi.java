@@ -53,15 +53,6 @@ public class HomeDepositi implements Initializable{
 	private Button exitButton;
 	
 	
-	
-	public HomeDepositi(AggiuntaDepositoController aggDepController, ElencoDepositiController viewDepController,
-			ModificaDepositoController modDepController, RimozioneDepositoController elimDepController) {
-		this.aggDepController = aggDepController;
-		this.viewDepController = viewDepController;
-		this.modDepController = modDepController;
-		this.elimDepController = elimDepController;
-	}
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
