@@ -15,6 +15,7 @@ public class Main extends Application {
 
 	public final static Integer MIN_WIDTH = 720;
 	public final static Integer MIN_HIGHT = 480;
+	
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -26,8 +27,8 @@ public class Main extends Application {
 		 */
 		primaryStage.setTitle("ERMS");
 
-		// TODO: aggiungere l'icona del programma
-		// primaryStage.getIcons().add(new Image("path"));
+		//TODO
+		//primaryStage.getIcons().add(new Image("/main/java/resources/images/icon.ico"));
 
 		primaryStage.setMinWidth(MIN_WIDTH);
 		primaryStage.setMinHeight(MIN_HIGHT);
