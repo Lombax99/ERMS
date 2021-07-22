@@ -119,6 +119,9 @@ public class ViewPinze implements Initializable {
 
 		inserisciDatiPinzaStage.setScene(popUpScene);
 		inserisciDatiPinzaStage.initModality(Modality.APPLICATION_MODAL);
+		inserisciDatiPinzaStage.setOnCloseRequest(e -> {
+			this.stampa();
+		});
 		inserisciDatiPinzaStage.show();
 	}
 	
