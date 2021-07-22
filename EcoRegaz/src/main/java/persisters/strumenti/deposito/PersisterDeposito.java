@@ -8,6 +8,9 @@ import java.sql.Statement;
 
 import main.java.models.deposito.Deposito;
 import main.java.persisters.MainDB;
+import main.java.persisters.strumenti.pinze.PersisterPinze;
+import main.java.persisters.strumenti.rotoliSacchi.PersisterRotoliSacchi;
+import main.java.persisters.strumenti.scatoleGuanti.PersisterScatoleGuanti;
 
 /**
  * Classe che implementa i metodi per l'interazione con DB circa i depositi
@@ -58,6 +61,13 @@ public class PersisterDeposito implements IPersisterDeposito{
 	 * @throws SQLException
 	 */
 	private PersisterDeposito() throws SQLException {
+		
+		/*
+		 * Faccio creare le tabelle
+		 */
+		PersisterPinze.getInstance();
+		PersisterScatoleGuanti.getInstance();
+		PersisterRotoliSacchi.getInstance();
 
 		/*
 		 * Prelevo la connessione da MainDB, il quale sicuramente è già stato inizializzato

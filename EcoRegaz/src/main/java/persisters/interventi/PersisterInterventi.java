@@ -69,7 +69,7 @@ public class PersisterInterventi implements IPersisterInterventi {
 		/*
 		 * Creazione dello statement che permette di eseguire query SQL
 		 */
-		statement = connection.createStatement();
+		statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
 		/*
 		 * Verifica dell'esistenza della tabella degli Iscritti.
