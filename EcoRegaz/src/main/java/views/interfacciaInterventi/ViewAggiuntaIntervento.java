@@ -4,7 +4,6 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -85,7 +84,7 @@ public class ViewAggiuntaIntervento implements Initializable {
 		 */
 		for (Integer indexSelected : listaOperatori.getSelectionModel().getSelectedIndices()) {
 			try {
-				tuttiIscritti.absolute(indexSelected);
+				tuttiIscritti.absolute(indexSelected + 1);
 				listaCV.add(tuttiIscritti.getString(1));
 			} catch (SQLException e) {
 				AlertPanel.saysError("ERRORE nel salvataggio degli iscritti selezionati", e);
@@ -103,7 +102,7 @@ public class ViewAggiuntaIntervento implements Initializable {
 		/*
 		 * Aggiunta vera e propria
 		 */
-		aggiuntaInterventoController.aggiuntaIntervento(new Intervento(0, dataPicker.getValue(), listaCV, descrizioneArea.getText(), gravitaSpinner.getValue()), areaVerdeSelezionata);
+		aggiuntaInterventoController.aggiuntaIntervento(new Intervento(areaVerdeSelezionata.getId_GestionaleAreaVerde(), dataPicker.getValue(), listaCV, descrizioneArea.getText(), gravitaSpinner.getValue()), areaVerdeSelezionata);
 
 	}
 
@@ -171,9 +170,9 @@ public class ViewAggiuntaIntervento implements Initializable {
 
 		// TODO da rimuovere
 		try {
-			PersisterIscritti.getInstance().aggiuntaIscritto(new Iscritto("Riccardo", "Evangelisti", LocalTime.now().toString()));
-			PersisterIscritti.getInstance().aggiuntaIscritto(new Iscritto("Luca", "Evangelisti", LocalTime.now().toString() + 1));
-			PersisterIscritti.getInstance().aggiuntaIscritto(new Iscritto("Marco", "Evangelisti", LocalTime.now().toString() + 2));
+			PersisterIscritti.getInstance().aggiuntaIscritto(new Iscritto("Riccardo", "Evangelisti", "VN"));
+			PersisterIscritti.getInstance().aggiuntaIscritto(new Iscritto("Luca", "Evangelisti", "GR"));
+			PersisterIscritti.getInstance().aggiuntaIscritto(new Iscritto("Marco", "Evangelisti", "CR"));
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		} // fin qui
@@ -218,11 +217,11 @@ public class ViewAggiuntaIntervento implements Initializable {
 			AlertPanel.saysError("ERRORE nella visualizza degli iscritti", e);
 		}
 
-		/*
+		/* TODO non funziona
 		 * Set up di listaOperatori: possibilità di multiple selection
 		 */
 		listaOperatori.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		
+
 
 
 		/*

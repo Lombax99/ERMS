@@ -15,22 +15,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" stylesheets="@../../../resources/bootstrap3.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.views.interfacciaInterventi.ViewVisualizzazioneInterventiPassati">
    <children>
-      <TableView layoutX="25.0" layoutY="114.0" prefHeight="339.0" prefWidth="681.0">
+      <TableView fx:id="tabella" layoutX="25.0" layoutY="114.0" prefHeight="339.0" prefWidth="681.0">
          <columns>
-            <TableColumn prefWidth="77.60000610351562" text="Data" />
-            <TableColumn prefWidth="163.20001220703125" text="Area Verde" />
-            <TableColumn minWidth="0.0" prefWidth="180.0" text="Descrizione" />
-            <TableColumn prefWidth="51.20001220703125" text="Gravità" />
-            <TableColumn prefWidth="147.20001220703125" text="Quartiere" />
-            <TableColumn prefWidth="67.199951171875" text="N. Op." />
+            <TableColumn fx:id="dataColumn" prefWidth="77.60000610351562" text="Data" />
+            <TableColumn fx:id="areaVerdeColumn" prefWidth="163.20001220703125" text="Area Verde" />
+            <TableColumn fx:id="descrizioneColumn" minWidth="0.0" prefWidth="180.0" text="Descrizione" />
+            <TableColumn fx:id="gravitaColumn" prefWidth="51.20001220703125" text="Gravità" />
+            <TableColumn fx:id="quartiereColumn" prefWidth="147.20001220703125" text="Quartiere" />
+            <TableColumn fx:id="numOpColumn" prefWidth="67.199951171875" text="N. Op." />
          </columns>
       </TableView>
-      <TextField layoutX="129.0" layoutY="76.0" prefHeight="31.0" prefWidth="134.0" promptText="Area Verde" />
-      <TextField layoutX="281.0" layoutY="76.0" prefHeight="31.0" prefWidth="146.0" promptText="Descrizione" />
-      <Button layoutX="613.0" layoutY="75.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="62.0" text="Cerca" />
-      <DatePicker layoutX="35.0" layoutY="41.0" prefHeight="26.0" prefWidth="74.0" promptText="inizio" />
-      <DatePicker layoutX="35.0" layoutY="76.0" prefHeight="26.0" prefWidth="74.0" promptText="fine" />
-      <ChoiceBox layoutX="455.0" layoutY="76.0" prefWidth="134.0" />
+      <TextField fx:id="nomeAreaField" layoutX="129.0" layoutY="76.0" prefHeight="31.0" prefWidth="134.0" promptText="Area Verde" />
+      <TextField fx:id="descrizioneInterventiField" layoutX="281.0" layoutY="76.0" prefHeight="31.0" prefWidth="146.0" promptText="Descrizione" />
+      <Button layoutX="613.0" layoutY="75.0" mnemonicParsing="false" onAction="#cercaInterventiHandler" prefHeight="15.0" prefWidth="62.0" text="Cerca" />
+      <DatePicker fx:id="dataPickerInizio" layoutX="35.0" layoutY="41.0" prefHeight="26.0" prefWidth="74.0" promptText="inizio" />
+      <DatePicker fx:id="dataPickerFine" layoutX="35.0" layoutY="76.0" prefHeight="26.0" prefWidth="74.0" promptText="fine" />
+      <ChoiceBox fx:id="quartieri" layoutX="455.0" layoutY="76.0" prefWidth="134.0" />
       <Label graphicTextGap="0.0" layoutX="280.0" layoutY="14.0" prefHeight="31.0" prefWidth="172.0" text="Interventi Passati" textFill="#6b9239">
          <font>
             <Font name="System Bold" size="21.0" />
