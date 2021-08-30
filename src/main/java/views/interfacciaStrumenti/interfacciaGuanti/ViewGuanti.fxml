@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" stylesheets="@../../../../resources/bootstrap3.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.views.interfacciaStrumenti.interfacciaGuanti.ViewGuanti">
+   <children>
+      <ListView layoutX="103.0" layoutY="114.0" prefHeight="332.0" prefWidth="188.0" />
+      <Button fx:id="aggiungi" layoutX="454.0" layoutY="135.0" mnemonicParsing="false" onAction="#tastoAggiungiScatolaGuantiHandler" text="+" />
+      <Button fx:id="rimuovi" layoutX="453.0" layoutY="175.0" mnemonicParsing="false" onAction="#tastoRimuoviScatolaGuantiHandler" prefHeight="32.0" prefWidth="32.0" text="-" />
+      <TextField layoutX="494.0" layoutY="155.0" prefHeight="26.0" prefWidth="58.0" />
+      <ListView layoutX="308.0" layoutY="114.0" prefHeight="332.0" prefWidth="66.0" />
+      <Label layoutX="334.0" layoutY="133.0" text="XS" />
+      <Label layoutX="336.0" layoutY="167.0" text="S" />
+      <Label layoutX="333.0" layoutY="199.0" text="M" />
+      <Label layoutX="336.0" layoutY="231.0" text="L" />
+      <Label layoutX="334.0" layoutY="262.0" text="XL" />
+      <Label graphicTextGap="0.0" layoutX="323.0" layoutY="14.0" prefHeight="38.0" prefWidth="74.0" text="Guanti" textAlignment="CENTER" textFill="#6b9239" wrapText="true">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="120.0" layoutY="142.0" text="D001" />
+      <Label layoutX="168.0" layoutY="142.0" text="Casa Riccardo" />
+      <Label layoutX="134.0" layoutY="96.0" opacity="0.5" text="Deposito" />
+      <Label layoutX="120.0" layoutY="170.0" text="D002" />
+      <Label layoutX="168.0" layoutY="170.0" text="Casa Luca" />
+      <Label layoutX="120.0" layoutY="199.0" text="D004" />
+      <Label layoutX="168.0" layoutY="199.0" text="Magazzino Comune" />
+      <Button fx:id="exitButton" layoutX="655.0" layoutY="11.0" mnemonicParsing="false">
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="34.0" preserveRatio="true" rotate="180.0">
+               <image>
+                  <Image url="@../../../../resources/images/immagine_esci.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <JFXDrawer fx:id="sidePanel" layoutY="1.0" prefHeight="480.0" prefWidth="108.0" />
+   </children>
+</AnchorPane>
