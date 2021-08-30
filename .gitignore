@@ -1,3 +1,4 @@
+bin/
 ERMS_DB/
 /derby.log
 /log
